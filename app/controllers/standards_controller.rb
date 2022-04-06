@@ -1,0 +1,2 @@
+class StandardsController < ApplicationController
+end
