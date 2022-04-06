@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :answers
+  resources :questions
+  resources :sections
+  resources :tests
+  resources :users
   resources :standards
   resources :clusters
   resources :domains
