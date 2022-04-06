@@ -14,12 +14,18 @@ puts 'seeding! 🌱 🌱 🌱 '
 file = File.read('client/public/standards.json')
 data_hash = JSON.parse(file)
 
-data_hash['data']['standards'].map do |std, v| 
+data_hash['data']['standards'].reverse_each.map do |std, v| 
     case v['statementLabel']
     when "Course"
         Course.create(name: v["description"]) 
     when "Conceptual Category"
-        puts 'yo yo yo'
+        Category.create(name: v['description'], course: Course.last)
+    when "Domain"
+        Domain.create(name: v['description'], category: Category.last)
+    when "Cluster"
+        Cluster.create(name: v['description'], domain: Domain.last)
+    when "Content Standard"
+        Standard.create(description: v['description'], notation: v['statementNotation'], cluster: Cluster.last)
     end
 end
 
