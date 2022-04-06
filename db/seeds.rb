@@ -10,6 +10,10 @@ require 'json'
 
 puts 'seeding! 🌱 🌱 🌱 '
 
+User.create(name: 'Ms. Zhou', username: 'rzhou', 
+    image: 'https://stickershop.line-scdn.net/stickershop/v1/product/8271654/LINEStorePC/main.png;compress=true',
+    bio: 'Math teacher with a knack for boba.',
+    course_id: 4)
 
 file = File.read('client/public/standards.json')
 data_hash = JSON.parse(file)
@@ -28,8 +32,5 @@ data_hash['data']['standards'].reverse_each.map do |std, v|
         Standard.create(description: v['description'], notation: v['statementNotation'], cluster: Cluster.last)
     end
 end
-
-
-
 
 puts 'done seeding! 🌱 🌱 🌱'
