@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: MyString
+  difficulty: MyString
+  type: 
+  section: one
+  standard: one
+
+two:
+  content: MyString
+  difficulty: MyString
+  type: 
+  section: two
+  standard: two
