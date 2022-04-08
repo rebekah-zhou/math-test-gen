@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Modal from 'react-modal';
 import styled from 'styled-components'
+import { useAuth } from '../Auth/use-auth'
+import { useNavigate } from 'react-router'
 
 const Horizontal = styled.div`
   display: flex;
@@ -44,6 +46,9 @@ function Login() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('') 
+  const auth = useAuth()
+  const navigate = useNavigate()
+  const state = useLocation()
 
   function openModal() {
     setIsModalOpen(true);
@@ -53,10 +58,18 @@ function Login() {
     setIsModalOpen(false);
   }
 
-  function handleLoginSubmit() {
-    console.log('hi')
+  function handleLoginSubmit(e) {
+    e.preventDefault()
+    if (showLogin) {
+      auth.login(username, password)
+    } else {
+      auth.signup(username, password, passwordConfirmation)
+    }
+    const path = state?.pathname 
+    if (path === '/login') {
+      navigate('/homepage')
+    }
   }
-
   return (
     <div>
       <button onClick={openModal}>Open Modal</button>
