@@ -1,15 +1,12 @@
 import React from 'react'
-import { useAuth } from "./use-auth.js";
-import { createRoot } from 'react-dom/client';
+import { useAuth } from './use-auth'
 import {
-    BrowserRouter as Router,
     Route,
-    useNavigate
+    Redirect
   } from "react-router-dom";
 
 function PrivateRoute({ children, ...rest }) {
     const auth = useAuth();
-    const Navigate = useNavigate()
     
     return (
         <Route
@@ -18,7 +15,7 @@ function PrivateRoute({ children, ...rest }) {
             auth.user ? (
             children
             ) : (
-            <Navigate
+            <Redirect
                 to={{
                 pathname: "/login",
                 state: { from: location }
@@ -28,6 +25,6 @@ function PrivateRoute({ children, ...rest }) {
         }
         />
     );
-}
+  }
 
 export default PrivateRoute

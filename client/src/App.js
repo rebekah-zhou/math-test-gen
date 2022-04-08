@@ -1,14 +1,11 @@
 import './App.css';
-import { ProvideAuth } from './use-auth'
-import PrivateRoute from './PrivateRoute';
+import { ProvideAuth } from './Auth/use-auth'
 import NavBar from './Common/NavBar';
 import Home from './Home/Home';
 import Test from './Test/Test'
-import React from "react";
-import {
-  BrowserRouter as Router,
-  Route
-} from "react-router-dom";
+import PrivateRoute from './Auth/PrivateRoute';
+import React from "react"
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 function App() {
   return (
