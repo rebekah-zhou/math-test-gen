@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Modal from 'react-modal';
 import styled from 'styled-components'
 import { useAuth } from '../Auth/use-auth'
-import { useNavigate } from 'react-router'
+import { Redirect, useLocation } from 'react-router-dom'
 
 const Horizontal = styled.div`
   display: flex;
@@ -40,14 +40,13 @@ const customStyles = {
 Modal.setAppElement('body')
 
 function Login() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const [showLogin, setShowLogin] = useState(true)
   const [name, setName] = useState("")
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('') 
   const auth = useAuth()
-  const navigate = useNavigate()
   const state = useLocation()
 
   function openModal() {
@@ -65,14 +64,10 @@ function Login() {
     } else {
       auth.signup(username, password, passwordConfirmation)
     }
-    const path = state?.pathname 
-    if (path === '/login') {
-      navigate('/homepage')
-    }
   }
   return (
     <div>
-      <button onClick={openModal}>Open Modal</button>
+      {/* <button onClick={openModal}>Open Modal</button> */}
       <Modal
         isOpen={isModalOpen}
         onRequestClose={closeModal}

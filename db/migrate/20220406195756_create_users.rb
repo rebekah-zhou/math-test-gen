@@ -6,7 +6,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :password_digest
       t.string :image
       t.text :bio
-      t.belongs_to :course, null: false, foreign_key: true
+      t.belongs_to :course, foreign_key: true
 
       t.timestamps
     end
