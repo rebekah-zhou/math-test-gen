@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import Modal from 'react-modal';
 import styled from 'styled-components'
-import { useAuth } from '../Auth/use-auth'
-import { Redirect, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 const Horizontal = styled.div`
   display: flex;
@@ -39,36 +38,55 @@ const customStyles = {
 
 Modal.setAppElement('body')
 
-function Login() {
-  const [isModalOpen, setIsModalOpen] = useState(true);
-  const [showLogin, setShowLogin] = useState(true)
+function Login({ onLogin }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showLogin, setShowLogin] = useState(null)
   const [name, setName] = useState("")
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('') 
-  const auth = useAuth()
-  const state = useLocation()
+  const [errorMsgs, setErrorMsgs] = useState('')
 
-  function openModal() {
-    setIsModalOpen(true);
+  function openModal(loginOrSignup) {
+    setShowLogin(loginOrSignup)
+    setIsModalOpen(true)
   }
-
+  
   function closeModal() {
     setIsModalOpen(false);
   }
 
+  function submitFetch(userObj, routeString) { 
+    fetch(routeString, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userObj),
+    })
+      .then(r => {
+        if (r.ok) {
+          r.json()
+          .then((user) => onLogin(user))
+        } else {
+          r.json().then(data => setErrorMsgs(() => data[routeString === '/login' ? 'error' : 'errors']))
+        }
+      }) 
+  }
+  
   function handleLoginSubmit(e) {
     e.preventDefault()
     if (showLogin) {
-      console.log('starting to log in...')
-      auth.login(username, password)
+      submitFetch({ username, password }, '/login')
     } else {
-      auth.signup(username, password, passwordConfirmation)
+      submitFetch({username, password, password_confirmation: passwordConfirmation}, '/users')
     }
   }
+
   return (
     <div>
-      {/* <button onClick={openModal}>Open Modal</button> */}
+      <button onClick={() => openModal(true)}>Login</button>
+      <button onClick={() => openModal(false)}>Signup</button>
       <Modal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
@@ -79,8 +97,8 @@ function Login() {
             <span>{showLogin ? 'Login' : 'Sign up'}</span>
             <button onClick={closeModal}>x</button>
           </Horizontal>
-          <VerticalForm>
-            {showLogin ? null : 
+          <VerticalForm onSubmit={handleLoginSubmit}>
+            {showLogin ? null :
             // Refactor inputs?
               <input
                 type='text'
@@ -103,7 +121,7 @@ function Login() {
               value={password}
               onChange={e => setPassword(e.target.value)}
             />
-            {showLogin ? null : 
+            {showLogin ? null :
               <input
                 type='password'
                 name='password_confirmation'
@@ -113,7 +131,6 @@ function Login() {
             />}
             <button
               type='submit'
-              onChange={handleLoginSubmit}
             >
               {showLogin ? 'Log in!' : "Let's make some tests!"}
             </button>
@@ -124,7 +141,7 @@ function Login() {
               {showLogin ? "Sign up" : "Login"}
             </StyledSpan>
           </p>
-          
+      
         </VerticalForm>
       </Modal>
     </div>

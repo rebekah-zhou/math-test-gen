@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import Login from './Login'
-import { useAuth } from '../Auth/use-auth'
+import { UserContext } from './../App'
 
-function Home() {
-  const auth = useAuth()
+function Home({ onLogin }) {
+  const user = useContext(UserContext)
 
   return (
     <div>
-      {auth.user ? null : <Login />}
+      <Login onLogin={onLogin} />
     </div>
   )
 }
