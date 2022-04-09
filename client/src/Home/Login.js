@@ -60,6 +60,7 @@ function Login() {
   function handleLoginSubmit(e) {
     e.preventDefault()
     if (showLogin) {
+      console.log('starting to log in...')
       auth.login(username, password)
     } else {
       auth.signup(username, password, passwordConfirmation)
