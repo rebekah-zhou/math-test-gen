@@ -1,5 +1,4 @@
 import React from 'react'
-import { useAuth } from '../Auth/use-auth.js'
 import { NavLink } from 'react-router-dom'
 import logo from './math-test.png'
 import styled from "styled-components";
@@ -12,40 +11,43 @@ const NavUnlisted = styled.ul`
   }
 
   li {
-    color: red;
+    color: teal;
     margin: 0 0.8rem;
     font-size: 1.3rem;
     position: relative;
     list-style: none;
+    
+  &:hover{
+    color: lightblue;
   }
-
-  .current {
-    li {
-      border-bottom: 2px solid black;
-    }
   }
 
   .nav-img {
     height: 100px;
     width: auto;
   }
-`;
 
+`
 
-const links = [
-  {name: "Tests", path:"/test"},
-  {name: "Logout", path:"/about"},
-];
+function NavBar({ onLogout }) {
 
-function NavBar() {
+  function handleLogout() {
+    fetch('/logout', {
+      method: 'DELETE',
+    }).then(() => onLogout())
+  }
+
   return (
     <NavUnlisted>
-      <NavLink to='/home'><img src={logo} className='nav-img' alt='logo'/></NavLink>
-      {links.map((link, index) => (
-        <NavLink key={index} to={link.path} exact activeClassName="current">
-          <li>{link.name}</li>
-        </NavLink>
-      ))}
+      <NavLink to='/'>
+        <li><img src={logo} className='nav-img' alt='logo'/></li>
+      </NavLink>
+      <NavLink to='/test'>
+        <li>Tests</li>
+      </NavLink>
+      <NavLink to='/'>
+        <li onClick={handleLogout}>Logout</li>
+      </NavLink>
     </NavUnlisted>
   );
 }

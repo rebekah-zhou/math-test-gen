@@ -39,8 +39,8 @@ function useProvideAuth() {
     return submitFetch({ username, password }, '/login')
   }
 
-  const signup = (username, password, passwordConfirmation, course) => {
-    return submitFetch({username, password, password_confirmation: passwordConfirmation, course}, '/users')
+  const signup = (username, password, passwordConfirmation) => {
+    return submitFetch({username, password, password_confirmation: passwordConfirmation}, '/users')
   }
 
   const signout = () => {

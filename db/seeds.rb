@@ -10,10 +10,9 @@ require 'json'
 
 puts 'seeding! 🌱 🌱 🌱 '
 
-User.create(name: 'Ms. Zhou', username: 'rzhou', 
+User.create(name: 'Ms. Zhou', username: 'boba_queen', password: '0',
     image: 'https://stickershop.line-scdn.net/stickershop/v1/product/8271654/LINEStorePC/main.png;compress=true',
-    bio: 'Math teacher with a knack for boba.',
-    course_id: 4)
+    bio: 'Math teacher with a knack for boba.')
 
 file = File.read('client/public/standards.json')
 data_hash = JSON.parse(file)

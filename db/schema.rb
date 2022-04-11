@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 2022_04_06_200242) do
     t.string "password_digest"
     t.string "image"
     t.text "bio"
-    t.integer "course_id", null: false
+    t.integer "course_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["course_id"], name: "index_users_on_course_id"
