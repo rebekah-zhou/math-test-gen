@@ -1,3 +1,19 @@
+
+.vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.horizontal {
+  display: flex;
+  flex-direction: row;
+}
+
+.centered {
+  justify-content: center;
+  align-items: center;
+}
+
 .App {
   text-align: center;
 }
@@ -36,3 +52,4 @@
     transform: rotate(360deg);
   }
 }
+

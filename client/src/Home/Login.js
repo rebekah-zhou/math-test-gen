@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Modal from 'react-modal';
 import styled from 'styled-components'
-import { useNavigate, useLocation } from 'react-router-dom'
 
 const Horizontal = styled.div`
   display: flex;
@@ -96,7 +95,7 @@ function Login({ onLogin }) {
   }
 
   return (
-    <div>
+    <div className='horizontal centered'>
       <button onClick={() => openModal(true)}>Login</button>
       <button onClick={() => openModal(false)}>Signup</button>
       <Modal

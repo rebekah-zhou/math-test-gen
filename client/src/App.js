@@ -4,13 +4,6 @@ import Home from './Home/Home';
 import Test from './Test/Test'
 import React, { useEffect, useState, createContext } from "react"
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import styled from 'styled-components';
-
-const CenteredDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  align-content: center;
-`
 
 export const UserContext = createContext()
 
@@ -56,7 +49,6 @@ function App() {
     
 
   return (
-    <CenteredDiv>
       <UserContext.Provider value={user}>
         {showNavBar ? <NavBar onLogout={handleLogout} /> : null }
         <Routes>
@@ -64,7 +56,6 @@ function App() {
           <Route path='/' element={<Home onLogin={handleLogin}/>} />
         </Routes>
       </UserContext.Provider>
-    </CenteredDiv>
   );
 }
 
