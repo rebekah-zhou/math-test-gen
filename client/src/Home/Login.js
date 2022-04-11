@@ -41,11 +41,10 @@ Modal.setAppElement('body')
 function Login({ onLogin }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showLogin, setShowLogin] = useState(null)
-  const [name, setName] = useState("")
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('') 
-  const [errorMsgs, setErrorMsgs] = useState('')
+  const [errorMsgs, setErrorMsgs] = useState([])
 
   function openModal(loginOrSignup) {
     setShowLogin(loginOrSignup)
@@ -79,7 +78,20 @@ function Login({ onLogin }) {
     if (showLogin) {
       submitFetch({ username, password }, '/login')
     } else {
-      submitFetch({username, password, password_confirmation: passwordConfirmation}, '/users')
+      submitFetch({ username, password, password_confirmation: passwordConfirmation}, '/users')
+    }
+  }
+
+  function handleChangeFormClick() {
+    setErrorMsgs("")
+    setShowLogin(!showLogin)
+    setPassword("")
+  }
+
+  let errors = []
+  if (!showLogin && errorMsgs) {
+    for (let i = 0; i < errorMsgs.length; i++) {
+      errors.push(<span key={`${i}`} style={{'color': 'red'}}>{errorMsgs[i]}</span>)
     }
   }
 
@@ -98,7 +110,7 @@ function Login({ onLogin }) {
             <button onClick={closeModal}>x</button>
           </Horizontal>
           <VerticalForm onSubmit={handleLoginSubmit}>
-            {showLogin ? null :
+            {/* {showLogin ? null :
             // Refactor inputs?
               <input
                 type='text'
@@ -106,7 +118,7 @@ function Login({ onLogin }) {
                 placeholder='name'
                 value={name}
                 onChange={e => setName(e.target.value)}
-              />}
+              />} */}
             <input
               type='text'
               name='username'
@@ -135,9 +147,11 @@ function Login({ onLogin }) {
               {showLogin ? 'Log in!' : "Let's make some tests!"}
             </button>
           </VerticalForm>
+          {showLogin && errorMsgs.length > 1 ? <p style={{'color': 'red'}}>{errorMsgs}</p>: null}
+          {errors}
           <p>
             {showLogin ? "Don't have an account? " : "Already have an account? "}
-            <StyledSpan onClick={() => setShowLogin(!showLogin)}>
+            <StyledSpan onClick={handleChangeFormClick}>
               {showLogin ? "Sign up" : "Login"}
             </StyledSpan>
           </p>

@@ -26,7 +26,11 @@ function App() {
       function handleLogin(user) {
         setUser(() => user)
         const path = state?.pathname 
-        navigate(path || '/test')
+        if (path === '/') {
+          navigate('/test')
+        } else {
+          navigate(path)
+        }
       }
     
       function handleLogout() {

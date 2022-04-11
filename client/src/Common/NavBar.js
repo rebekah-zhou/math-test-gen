@@ -39,13 +39,13 @@ function NavBar({ onLogout }) {
 
   return (
     <NavUnlisted>
-      <NavLink to='/home'>
+      <NavLink to='/'>
         <li><img src={logo} className='nav-img' alt='logo'/></li>
       </NavLink>
       <NavLink to='/test'>
         <li>Tests</li>
       </NavLink>
-      <NavLink to='/home'>
+      <NavLink to='/'>
         <li onClick={handleLogout}>Logout</li>
       </NavLink>
     </NavUnlisted>

@@ -24,30 +24,23 @@ ActiveRecord::Schema.define(version: 2022_04_06_200242) do
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.integer "course_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.index ["course_id"], name: "index_categories_on_course_id"
   end
 
   create_table "clusters", force: :cascade do |t|
-    t.string "name"
+    t.text "name"
+    t.string "notation"
     t.integer "domain_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.index ["domain_id"], name: "index_clusters_on_domain_id"
   end
 
   create_table "courses", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "domains", force: :cascade do |t|
-    t.string "name"
+    t.text "name"
     t.integer "category_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_domains_on_category_id"
   end
 
@@ -72,11 +65,9 @@ ActiveRecord::Schema.define(version: 2022_04_06_200242) do
   end
 
   create_table "standards", force: :cascade do |t|
-    t.string "description"
+    t.text "description"
     t.string "notation"
     t.integer "cluster_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.index ["cluster_id"], name: "index_standards_on_cluster_id"
   end
 
