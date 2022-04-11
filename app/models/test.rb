@@ -3,4 +3,5 @@ class Test < ApplicationRecord
 
   has_many :sections
   has_many :questions through: :sections
+  # has_many :standards through: :questions
 end

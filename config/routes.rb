@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
-  resources :answers
-  resources :questions
-  resources :sections
-  resources :tests
-  resources :users
-  resources :standards
-  resources :clusters
-  resources :domains
-  resources :categories
-  resources :courses
+  # resources :answers
+  # resources :questions
+  # resources :sections
+  # resources :tests
+  # resources :users
+  # resources :standards
+  # resources :clusters
+  # resources :domains
+  # resources :categories
+  # resources :courses
 
+  post '/onestep', to: "questions#create_onestep_equations"
   post "/login", to: "sessions#create"
   post "/signup", to: 'users#create'
   get "/me", to: "users#show"

@@ -7,6 +7,12 @@ const Horizontal = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `
+const XButton = styled.button`
+  height: 20px;
+  width: 20px;
+  padding-left: 5px;
+  text-align: center;
+`
 const VerticalForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -52,6 +58,9 @@ function Login({ onLogin }) {
   
   function closeModal() {
     setIsModalOpen(false);
+    setUsername('')
+    setPassword('')
+    setPasswordConfirmation('')
   }
 
   function submitFetch(userObj, routeString) { 
@@ -77,7 +86,7 @@ function Login({ onLogin }) {
     if (showLogin) {
       submitFetch({ username, password }, '/login')
     } else {
-      submitFetch({ username, password, password_confirmation: passwordConfirmation}, '/users')
+      submitFetch({ username, password, password_confirmation: passwordConfirmation}, '/signup')
     }
   }
 
@@ -105,8 +114,8 @@ function Login({ onLogin }) {
       >
         <VerticalForm as='div'>
           <Horizontal>
-            <span>{showLogin ? 'Login' : 'Sign up'}</span>
-            <button onClick={closeModal}>x</button>
+            <h2>{showLogin ? 'Login' : 'Sign up'}</h2>
+            <XButton onClick={closeModal}>x</XButton>
           </Horizontal>
           <VerticalForm onSubmit={handleLoginSubmit}>
             {/* {showLogin ? null :
@@ -144,7 +153,7 @@ function Login({ onLogin }) {
             <button
               type='submit'
             >
-              {showLogin ? 'Log in!' : "Let's make some tests!"}
+              {showLogin ? 'Login >>' : "Let's make some tests >>"}
             </button>
           </VerticalForm>
           {showLogin && errorMsgs.length > 1 ? <p style={{'color': 'red'}}>{errorMsgs}</p>: null}

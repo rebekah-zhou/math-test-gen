@@ -5,14 +5,16 @@ import styled from "styled-components";
 
 const NavUnlisted = styled.ul`
   display: flex;
-  background-color: red;
+  background-color: ${props => props.theme.colors.darkPurple};
   a {
     text-decoration: none;
   }
+  padding: 1rem;
 
   li {
-    color: teal;
+    color: ${props => props.theme.colors.white};
     margin: 0 0.8rem;
+    padding: 0 1rem;
     font-size: 1.3rem;
     list-style: none;
     display: flex;
@@ -20,7 +22,9 @@ const NavUnlisted = styled.ul`
     align-content: center;
     
   &:hover{
-    color: lightblue;
+    background-color: ${props => props.theme.colors.white};
+    color: ${props => props.theme.colors.orchid};
+    border-radius: 20px;
   }
   }
 
@@ -47,15 +51,15 @@ function NavBar({ onLogout }) {
     <NavUnlisted>
       <NavLink to='/'>
         <li>
-          <span>Math Test Gen</span>
+          <span> Math Test Gen </span>
           <img src={logo} className='nav-img' alt='logo'/>
         </li>
       </NavLink>
       <NavLink to='/test'>
-        <li>Tests</li>
+        <li> Tests </li>
       </NavLink>
       <NavLink to='/'>
-        <li onClick={handleLogout}>Logout</li>
+        <li onClick={handleLogout}> Logout </li>
       </NavLink>
     </NavUnlisted>
   );
