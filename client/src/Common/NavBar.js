@@ -14,16 +14,22 @@ const NavUnlisted = styled.ul`
     color: teal;
     margin: 0 0.8rem;
     font-size: 1.3rem;
-    position: relative;
     list-style: none;
+    display: flex;
+    justify-content: center;
+    align-content: center;
     
   &:hover{
     color: lightblue;
   }
   }
 
+  li > span {
+    font-weight: bold;
+  }
+
   .nav-img {
-    height: 100px;
+    height: 28px;
     width: auto;
   }
 
@@ -40,7 +46,10 @@ function NavBar({ onLogout }) {
   return (
     <NavUnlisted>
       <NavLink to='/'>
-        <li><img src={logo} className='nav-img' alt='logo'/></li>
+        <li>
+          <span>Math Test Gen</span>
+          <img src={logo} className='nav-img' alt='logo'/>
+        </li>
       </NavLink>
       <NavLink to='/test'>
         <li>Tests</li>

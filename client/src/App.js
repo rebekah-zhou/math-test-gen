@@ -4,11 +4,19 @@ import Home from './Home/Home';
 import Test from './Test/Test'
 import React, { useEffect, useState, createContext } from "react"
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import styled from 'styled-components';
+
+const CenteredDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-content: center;
+`
 
 export const UserContext = createContext()
 
 function App() {
     const [user, setUser] = useState(null);
+    const [showNavBar, setShowNavBar] = useState(false)
     const navigate = useNavigate()
     const state = useLocation()
 
@@ -22,6 +30,14 @@ function App() {
           }
         }) 
       }, [])
+
+      
+    useEffect(() => {
+      if(user) {
+        setShowNavBar(true)
+        // setPageLoaded(true)
+      }
+    }, [user])
     
       function handleLogin(user) {
         setUser(() => user)
@@ -40,13 +56,15 @@ function App() {
     
 
   return (
-    <UserContext.Provider value={user}>
-      <NavBar onLogout={handleLogout} />
-      <Routes>
-        <Route path='/test' element={<Test />}/>
-        <Route path='/' element={<Home onLogin={handleLogin}/>} />
-      </Routes>
-    </UserContext.Provider>
+    <CenteredDiv>
+      <UserContext.Provider value={user}>
+        {showNavBar ? <NavBar onLogout={handleLogout} /> : null }
+        <Routes>
+          <Route path='/test' element={<Test />}/>
+          <Route path='/' element={<Home onLogin={handleLogin}/>} />
+        </Routes>
+      </UserContext.Provider>
+    </CenteredDiv>
   );
 }
 
