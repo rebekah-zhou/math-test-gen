@@ -1,8 +1,12 @@
 import React from 'react'
+import TestSection from './TestSection'
 
-function TestView() {
+function TestView({ questions }) {
+    const { answers, content, isMultipleChoice, standard } = questions
   return (
-    <div>TestView</div>
+    <div className="vertical">
+        <TestSection />
+    </div>
   )
 }
 
