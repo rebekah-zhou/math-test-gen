@@ -5,11 +5,11 @@ class StandardsController < ApplicationController
     end
 
     def show
-        standard = Standard.find_by(id: session[:user_id])
-        if user
+        standard = Standard.find(params[:id])
+        if standard
           render json: standard
         else
-          render json: { error: "Not authorized" }, status: :unauthorized
+          render json: { error: "Standard not found" }, status: :not_found
         end
     end
 end

@@ -5,11 +5,11 @@ class CoursesController < ApplicationController
     end
 
     def show
-        course = Course.find_by(id: session[:user_id])
-        if user
+        course = Course.find_by(id: params[:id])
+        if course
           render json: course
         else
-          render json: { error: "Not authorized" }, status: :unauthorized
+          render json: { error: "Course not found" }, status: :not_found
         end
     end
 end

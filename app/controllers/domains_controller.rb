@@ -5,11 +5,11 @@ class DomainsController < ApplicationController
     end
 
     def show
-        domain = Domain.find_by(id: session[:user_id])
-        if user
+        domain = Domain.find_by(id: params[:id])
+        if domain
           render json: domain
         else
-          render json: { error: "Not authorized" }, status: :unauthorized
+          render json: { error: "Domain not found" }, status: :not_found
         end
     end
 end

@@ -14,11 +14,10 @@ User.create(name: 'Ms. Zhou', username: 'boba_queen', password: '0',
     image: 'https://stickershop.line-scdn.net/stickershop/v1/product/8271654/LINEStorePC/main.png;compress=true',
     bio: 'Math teacher with a knack for boba.')
 
-test1 = Test.create(name: 'Linear Equations')
+test1 = Test.create(title: 'Linear Equations', user_id: 1)
 
 
-Section.create(test: test1, instructions: "Solve for #{letter1}.")
-Question.create(content: )
+Section.create(test_id: test1.id, instructions: "Solve for x.")
 
 
 file = File.read('client/public/standards.json')

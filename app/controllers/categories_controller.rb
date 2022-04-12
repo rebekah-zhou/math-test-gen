@@ -5,11 +5,11 @@ class CategoriesController < ApplicationController
     end
 
     def show
-        category = Category.find_by(id: session[:user_id])
-        if user
+        category = Category.find_by(id: params[:id])
+        if category
           render json: category
         else
-          render json: { error: "Not authorized" }, status: :unauthorized
         end
+        render json: { error: "Category not found" }, status: :not_found
     end
 end
