@@ -1,7 +1,7 @@
 class Question < ApplicationRecord
   belongs_to :section
   belongs_to :standard
-  has_many :answers
+  has_many :answers, :dependent => :destroy
 
   def letter=(rand_letter) 
     @letter=rand_letter

@@ -1,16 +1,10 @@
 Rails.application.routes.draw do
-  # resources :answers
-  # resources :questions
-  # resources :sections
-  # resources :tests
-  # resources :users
-  resources :standards do
-    resources :questions
+  resources :questions, only: [:index, :show, :create, :destroy]
+  resources :sections do
+    resources :questions, only: [:index, :show]
   end
-  # resources :clusters
-  # resources :domains
-  # resources :categories
-  # resources :courses
+  resources :tests 
+  resources :sections
 
   post "/login", to: "sessions#create"
   post "/signup", to: 'users#create'
