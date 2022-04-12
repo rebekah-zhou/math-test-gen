@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   # resources :categories
   # resources :courses
 
-  post '/onestep', to: "questions#create_onestep_equations"
+  post '/onestep', to: "questions#create_onestep_equation"
   post "/login", to: "sessions#create"
   post "/signup", to: 'users#create'
   get "/me", to: "users#show"

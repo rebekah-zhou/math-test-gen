@@ -3,7 +3,7 @@ class Question < ApplicationRecord
   belongs_to :standard
   has_many :answers
 
-  def create_onestep_equation
+  def self.create_onestep_equation
     letter = rand_letter
     operation = rand_operation
     int1 = rand_int_small
@@ -19,7 +19,7 @@ class Question < ApplicationRecord
     end
 
     if operation == '/'
-      return letter + operation + int1 '=' + int2 
+      return letter + operation + int1 + '=' + int2 
     else
       return letter + operation + int2 + '=' + num
     end
