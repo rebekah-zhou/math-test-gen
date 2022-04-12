@@ -3,7 +3,7 @@ class CreateQuestions < ActiveRecord::Migration[6.1]
     create_table :questions do |t|
       t.string :content
       t.string :difficulty
-      t.string :type
+      t.boolean :isMultipleChoice
       t.belongs_to :section, null: false, foreign_key: true
       t.belongs_to :standard, null: false, foreign_key: true
 

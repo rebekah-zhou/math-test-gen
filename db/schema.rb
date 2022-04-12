@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2022_04_06_200242) do
   create_table "questions", force: :cascade do |t|
     t.string "content"
     t.string "difficulty"
-    t.string "type"
+    t.boolean "isMultipleChoice"
     t.integer "section_id", null: false
     t.integer "standard_id", null: false
     t.datetime "created_at", precision: 6, null: false

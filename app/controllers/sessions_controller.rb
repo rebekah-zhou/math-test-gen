@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
             render json: { error: "Invalid username" }, status: :unauthorized
         end
     end
+    
 
     def destroy
         session.delete :user_id

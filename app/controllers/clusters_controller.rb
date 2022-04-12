@@ -5,11 +5,11 @@ class ClustersController < ApplicationController
     end
 
     def show
-        cluster = Cluster.find_by(id: session[:user_id])
-        if user
+        cluster = Cluster.find_by(id: params[:id])
+        if cluster
           render json: cluster
         else
-          render json: { error: "Not authorized" }, status: :unauthorized
+          render json: { error: "Cluster not found" }, status: :not_found
         end
     end
 end
