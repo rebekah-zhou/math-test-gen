@@ -69,6 +69,8 @@ function App() {
         </Routes>
         :
         <Routes>
+          {/* Take Path out later  */}
+          <Route path='/test' element={<Test />}/>
           <Route path='/' element={<Home onLogin={handleLogin}/>} />
           <Route path='*' element={<Home onLogin={handleLogin} />}/>
         </Routes>

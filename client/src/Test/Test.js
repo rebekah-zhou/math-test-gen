@@ -1,67 +1,43 @@
 import React, { useState } from 'react'
+import TestForm from './TestForm'
+import TestView from './TestView'
 import styled from 'styled-components'
 
-const VerticalForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-`
+
 
 function Test() {
-const [title, setTitle] = useState('')
-const [questionCount, setQuestionCount] = useState("")
-const [equations, setEquations] = useState([])
-
-function handleSubmit(e) {
-  e.preventDefault()
-  fetch('/onestep', {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-  .then(r => {
-    if (r.ok) {
-      r.json()
-      .then((data) => setEquations(data))
-    } else {
-      console.log(r.json())
+  const [questions, setQuestions] = useState([])
+  
+  function handleQuestionFetch(formData, questionCount) {
+    const questions = []
+    for(let i = 0; i < questionCount; i++) {
+      questions.push(formData)
     }
-  })
-}
+    const questionObj = {"questions": questions}
+    console.log()
+    fetch('/questions', {
+      method: "POST",
+      headers: {
+      "Content-Type": "application/json",
+      },
+      body: JSON.stringify(questionObj)
+    })
+    .then(r => {
+        if (r.ok) {
+        r.json()
+        .then((data) => setQuestions(data))
+        } else {
+        console.log(r.json())
+        }
+    })
+  }
 
-console.log(equations)
+  console.log(questions)
 
   return (
-    <div>
-      <VerticalForm>
-        <div className='horizontal'>
-          <label>Title:  </label>
-          <input
-            type='text'
-            name='title'
-            id='title'
-            placeholder='Linear Equations Test'
-            value={title}
-            onChange={e => setTitle(e.target.value)}
-            required
-          />
-        </div>
-        <div className='horizontal'>
-          <label>Number of Questions:  </label>
-          <input
-            type='number'
-            name='questionCount'
-            id='questionCount'
-            placeholder='10'
-            value={questionCount}
-            onChange={e => setQuestionCount(e.target.value)}
-            required
-          />
-        </div>
-        <button type='submit' onClick={handleSubmit}>Generate!</button>
-      </VerticalForm>
+    <div className='horizontal'>
+      <TestForm onFormSubmit={handleQuestionFetch}/>
+      <TestView questions={questions}/>
     </div>
   )
 }
