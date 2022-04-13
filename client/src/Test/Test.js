@@ -1,20 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, createContext } from 'react'
 import TestForm from './TestForm'
 import TestView from './TestView'
 import styled from 'styled-components'
 
-
+export const QuestionsContext = createContext()
 
 function Test() {
   const [questions, setQuestions] = useState([])
   
-  function handleQuestionFetch(formData, questionCount) {
+  function handleQuestionFetch(questionFormData, questionCount, title) {
     const questions = []
     for(let i = 0; i < questionCount; i++) {
-      questions.push(formData)
+      questions.push(questionFormData)
     }
     const questionObj = {"questions": questions}
-    console.log()
+    fetch(`/tests/1`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({"title": title})
+    })
     fetch('/questions', {
       method: "POST",
       headers: {
@@ -32,13 +38,13 @@ function Test() {
     })
   }
 
-  console.log(questions)
-
   return (
-    <div className='horizontal'>
-      <TestForm onFormSubmit={handleQuestionFetch}/>
-      <TestView questions={questions}/>
-    </div>
+    <QuestionsContext.Provider value={questions}>
+      <div className='horizontal'>
+        <TestForm onFormSubmit={handleQuestionFetch}/>
+        <TestView />
+      </div>
+    </QuestionsContext.Provider>
   )
 }
 

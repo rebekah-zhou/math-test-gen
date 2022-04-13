@@ -9,18 +9,18 @@ const VerticalForm = styled.form`
 `
 
 function TestForm({ onFormSubmit }) {
-    const [formData, setFormData] = useState({
-        title: '',
+    const [questionFormData, setQuestionFormData] = useState({
         isMultipleChoice: true,
         difficulty: "easy",
         section_id: 1,
         standard_id: 129
     })
+    const [title, setTitle] = useState("")
     const [questionCount, setQuestionCount] = useState(1)
 
     function handleSubmit(e) {
         e.preventDefault()
-        onFormSubmit(formData, questionCount)
+        onFormSubmit(questionFormData, questionCount, title)
     }
   return (
     <div>
@@ -32,8 +32,8 @@ function TestForm({ onFormSubmit }) {
             name='title'
             id='title'
             placeholder=''
-            value={formData.title}
-            onChange={e => setFormData({...formData, title: e.target.value})}
+            value={title}
+            onChange={e => setTitle(e.target.value)}
             required
           />
         </div>
@@ -56,8 +56,8 @@ function TestForm({ onFormSubmit }) {
                 type='radio'
                 name='isMultipleChoice'
                 id='multipleChoice'
-                value={formData.isMultipleChoice}
-                onChange={() => setFormData({...formData, isMultipleChoice: true})}
+                value={questionFormData.isMultipleChoice}
+                onChange={() => setQuestionFormData({...questionFormData, isMultipleChoice: true})}
                 required
                 />
                 <label htmlFor='multipleChoice'>Multiple Choice</label>
@@ -67,8 +67,8 @@ function TestForm({ onFormSubmit }) {
                 type='radio'
                 name='isMultipleChoice'
                 id='freeResponse'
-                value={formData.isMultipleChoice}
-                onChange={() => setFormData({...formData, isMultipleChoice: false})}
+                value={questionFormData.isMultipleChoice}
+                onChange={() => setQuestionFormData({...questionFormData, isMultipleChoice: false})}
                 required
                 />
                 <label htmlFor='freeResponse'>Free Response</label>

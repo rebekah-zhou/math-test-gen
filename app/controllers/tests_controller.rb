@@ -13,9 +13,20 @@ class TestsController < ApplicationController
         end
     end
 
+    def update
+      test = Test.find(params[:id])
+      test.update(test_params)
+      render json: test
+    end
+
     def destroy
         test = Test.find(params[:id])
         test.delete
         head :no_content
+    end
+
+    private
+    def test_params
+      params.permit(:title, :description, :user_id)
     end
 end
