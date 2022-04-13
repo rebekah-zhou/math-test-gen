@@ -25,6 +25,19 @@ class TestsController < ApplicationController
         head :no_content
     end
 
+    def show_pdf 
+      @test = Test.find(params[:id])
+
+      respond_to do |format| 
+        format.html
+        format.pdf do
+          render pdf:"#{@test.user.name} - #{@test.title}",
+          page_size: 'A4',
+          template: "tests/show.html.erb"
+        end
+      end
+    end
+
     private
     def test_params
       params.permit(:title, :description, :user_id)
