@@ -3,12 +3,14 @@ Rails.application.routes.draw do
   resources :sections do
     resources :questions, only: [:index, :show]
   end
-  resources :tests 
+  resources :users do
+    resources :tests 
+  end
   resources :sections
 
   post "/login", to: "sessions#create"
   post "/signup", to: 'users#create'
-  get "/me", to: "users#show"
+  get "/me", to: "users#show_me"
   delete "/logout", to: "sessions#destroy"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
