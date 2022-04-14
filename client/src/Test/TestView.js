@@ -11,7 +11,7 @@ function TestView() {
   })
 
   useEffect(() => {
-    fetch('/tests/1')
+    fetch('/users/1/tests/1')
     .then(r => r.json())
     .then(data => setTest(data))
   }, [])

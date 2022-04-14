@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   resources :sections do
     resources :questions, only: [:index, :show]
   end
-  resources :tests 
+  resources :users do
+    resources :tests 
+  end
   resources :sections
 
   post "/login", to: "sessions#create"

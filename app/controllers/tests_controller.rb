@@ -1,16 +1,26 @@
 class TestsController < ApplicationController
     def index
         tests = Test.all
-        render json: tests
+        render json: tests, include: ['sections', 'sections.questions']
     end
 
     def show
         test = Test.find(params[:id])
         if test
-          render json: test
+          render json: test, include: ['sections', 'sections.questions']
         else
           render json: { error: "test not found" }, status: :not_found
         end
+    end
+
+    def create
+      test = Test.create(test_params)
+      if test.valid?
+        session[:test_id] = test.id
+        render json: test, status: :created
+      else
+        render json: { errors: test.errors.full_messages }, status: :unprocessable_entity
+      end
     end
 
     def update

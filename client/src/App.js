@@ -1,7 +1,8 @@
 import './App.css';
 import NavBar from './Common/NavBar';
 import Home from './Home/Home';
-import Test from './Test/Test'
+import TestList from './Test/TestList'
+import EditTest from './Test/EditTest';
 import React, { useEffect, useState, createContext } from "react"
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
@@ -65,13 +66,12 @@ function App() {
       {showNavBar ? <NavBar onLogout={handleLogout} /> : null }
       {user ?
         <Routes>
-          <Route path='/test' element={<Test />}/>
+          <Route path='/test/:id' element={<EditTest />} />
+          <Route path='/test' element={<TestList />}/>
           <Route path='/' element={<Home onLogin={handleLogin}/>} />
         </Routes>
         :
         <Routes>
-          {/* Take Path out later  */}
-          <Route path='/test' element={<Test />}/>
           <Route path='/' element={<Home onLogin={handleLogin}/>} />
           <Route path='*' element={<Home onLogin={handleLogin} />}/>
         </Routes>
