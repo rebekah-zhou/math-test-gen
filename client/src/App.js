@@ -36,6 +36,7 @@ function App() {
   }, [user])
   
   function handleLogin(user) {
+    setShowNavBar(true)
     setUser(() => user)
     const path = state?.pathname 
     // if (path === '/') {
