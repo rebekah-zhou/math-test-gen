@@ -10,15 +10,16 @@ require 'json'
 
 puts 'seeding! 🌱 🌱 🌱 '
 
-User.create(name: 'Ms. Zhou', username: 'boba_queen', password: '0',
+user = User.create(name: 'Ms. Zhou', username: 'boba_queen', password: '0',
     image: 'https://stickershop.line-scdn.net/stickershop/v1/product/8271654/LINEStorePC/main.png;compress=true',
     bio: 'Math teacher with a knack for boba.')
 
 test1 = Test.create(title: 'Linear Equations', user_id: 1)
+test2 = Test.create(title: 'Geometry Test', user_id: 1)
+test3 = Test.create(title: 'Functions Quiz', user_id: 1)
+test4 = Test.create(title: 'Creating Exponential Functions Assessment', user_id: 1)
 
-
-Section.create(test_id: test1.id, instructions: "Solve for x.")
-
+Section.create(test_id: test1.id, instructions: "Solve for unknown letter.")
 
 file = File.read('client/public/standards.json')
 data_hash = JSON.parse(file)
@@ -37,5 +38,11 @@ data_hash['data']['standards'].reverse_each.map do |std, v|
         Standard.create(description: v['description'], notation: v['statementNotation'], cluster: Cluster.last)
     end
 end
+
+UserCourse.create(user_id: 1, course_id: 1)
+UserCourse.create(user_id: 1, course_id: 2)
+UserCourse.create(user_id: 1, course_id: 3)
+
+
 
 puts 'done seeding! 🌱 🌱 🌱'
