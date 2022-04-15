@@ -55,7 +55,6 @@ function TestList() {
     .then((tests) => setTests(tests))
   }, [])
 
-  console.log(tests)
   return (
     <FlexGridDiv>
       <ColumnDiv>

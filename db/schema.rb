@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_06_200242) do
+ActiveRecord::Schema.define(version: 2022_04_15_211256) do
 
   create_table "answers", force: :cascade do |t|
     t.string "content"
@@ -86,10 +86,15 @@ ActiveRecord::Schema.define(version: 2022_04_06_200242) do
     t.string "password_digest"
     t.string "image"
     t.text "bio"
-    t.integer "course_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["course_id"], name: "index_users_on_course_id"
+  end
+
+  create_table "users_courses", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "course_id"
+    t.index ["course_id"], name: "index_users_courses_on_course_id"
+    t.index ["user_id"], name: "index_users_courses_on_user_id"
   end
 
   add_foreign_key "answers", "questions"
@@ -101,5 +106,4 @@ ActiveRecord::Schema.define(version: 2022_04_06_200242) do
   add_foreign_key "sections", "tests"
   add_foreign_key "standards", "clusters"
   add_foreign_key "tests", "users"
-  add_foreign_key "users", "courses"
 end

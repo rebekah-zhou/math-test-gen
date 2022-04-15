@@ -39,8 +39,9 @@ const NavUnlisted = styled.ul`
 
 `
 
-function NavBar({ onLogout }) {
-
+function NavBar({ onLogout, user }) {
+  const id = 5
+  console.log(user)
   function handleLogout() {
     fetch('/logout', {
       method: 'DELETE',
@@ -53,6 +54,11 @@ function NavBar({ onLogout }) {
         <li>
           <span> Math Test Gen </span>
           <img src={logo} className='nav-img' alt='logo'/>
+        </li>
+      </NavLink>
+      <NavLink to={`/test/${id}`}>
+        <li>
+          Create New Test
         </li>
       </NavLink>
       <NavLink to='/test'>
