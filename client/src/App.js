@@ -55,7 +55,6 @@ function App() {
     setUser(null)
     navigate('/')
   }
-  console.log(user)
   
   if (!pageLoaded) {
     return <h1></h1>
@@ -63,7 +62,7 @@ function App() {
 
   return (
     <UserContext.Provider value={user}>
-      {showNavBar ? <NavBar onLogout={handleLogout} /> : null }
+      {showNavBar ? <NavBar onLogout={handleLogout} user={user} /> : null }
       {user ?
         <Routes>
           <Route path='/test/:id' element={<EditTest />} />

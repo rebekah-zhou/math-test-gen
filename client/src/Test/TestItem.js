@@ -40,27 +40,27 @@ function TestItem({ test }) {
 
   return (
     <ColumnDiv>
-        <RowDiv>
-            <TitleDiv>
-							<input
-								type='checkbox'
-								name='selectTest'
-								value={isTestSelected}
-								onChange={() => setIsTestSelected(!isTestSelected)}
-							/>
-							<a href={`/test/${test.id}`}>{test.title}</a>
-						</TitleDiv>
-						<ColumnHeaderDiv>
-							<OwnerSpan>You</OwnerSpan>
-							<DateSpan>{test.updated_at.slice(0,10)}</DateSpan>
-							<IconSpan>
-								{/* Add functionality */}
-								<IconButton><img src={copyIcon}></img></IconButton>
-								<IconButton><img src={downloadIcon}></img></IconButton>
-								<IconButton><img src={deleteIcon}></img></IconButton>
-							</IconSpan>
-						</ColumnHeaderDiv>
-        </RowDiv>
+		<RowDiv>
+			<TitleDiv>
+				<input
+					type='checkbox'
+					name='selectTest'
+					value={isTestSelected}
+					onChange={() => setIsTestSelected(!isTestSelected)}
+				/>
+				<a href={`/test/${test.id}`}>{test.title}</a>
+			</TitleDiv>
+			<ColumnHeaderDiv>
+				<OwnerSpan>You</OwnerSpan>
+				<DateSpan>{test.updated_at.slice(0,10)}</DateSpan>
+				<IconSpan>
+					{/* Add functionality */}
+					<IconButton><img src={copyIcon}></img></IconButton>
+					<IconButton><img src={downloadIcon}></img></IconButton>
+					<IconButton><img src={deleteIcon}></img></IconButton>
+				</IconSpan>
+			</ColumnHeaderDiv>
+		</RowDiv>
     </ColumnDiv>
   )
 }

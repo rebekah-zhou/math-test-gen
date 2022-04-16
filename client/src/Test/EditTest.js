@@ -50,11 +50,15 @@ function Test() {
     })
   }
 
+  if (!test) {
+    return <h1></h1>
+  }
+
   return (
     <QuestionsContext.Provider value={questions}>
       <div className='horizontal'>
         <TestForm onFormSubmit={handleQuestionFetch}/>
-        <TestView />
+        <TestView test={test}/>
       </div>
     </QuestionsContext.Provider>
   )
