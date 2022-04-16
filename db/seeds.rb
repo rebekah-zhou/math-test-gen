@@ -19,7 +19,7 @@ test2 = Test.create(title: 'Geometry Test', user_id: 1)
 test3 = Test.create(title: 'Functions Quiz', user_id: 1)
 test4 = Test.create(title: 'Creating Exponential Functions Assessment', user_id: 1)
 
-Section.create(test_id: test1.id, instructions: "Solve for unknown letter.")
+Section.create(test_id: test1.id, instructions: "Solve for the unknown letter.")
 
 file = File.read('client/public/standards.json')
 data_hash = JSON.parse(file)
