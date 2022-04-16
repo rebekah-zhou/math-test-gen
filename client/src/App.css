@@ -16,6 +16,26 @@
 
 a {
   color: inherit;
+  text-decoration: none;
+}
+
+a:hover{
+  text-decoration: underline;
+}
+
+button:hover{
+  cursor: pointer;
+}
+
+button {
+  background: rgba(191, 85, 236, 0.5);
+  border-radius: 20px;
+  color: white;
+  border: white;
+  margin: 5px;
+  padding: 5px 10px;
+  font-family: Roboto;
+  font-size: large;
 }
 
 .App {

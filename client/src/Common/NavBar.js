@@ -5,16 +5,16 @@ import styled from "styled-components";
 
 const NavUnlisted = styled.ul`
   display: flex;
-  background-color: ${props => props.theme.colors.darkPurple};
+  background-color: ${props => props.theme.colors.blue};
   a {
     text-decoration: none;
   }
   padding: 1rem;
 
   li {
-    color: ${props => props.theme.colors.white};
+    color: white;
     margin: 0 0.8rem;
-    padding: 0 1rem;
+    padding: 0.2rem 1rem;
     font-size: 1.3rem;
     list-style: none;
     display: flex;
@@ -22,8 +22,8 @@ const NavUnlisted = styled.ul`
     align-content: center;
     
   &:hover{
-    background-color: ${props => props.theme.colors.white};
-    color: ${props => props.theme.colors.orchid};
+    background-color: white;
+    color: ${props => props.theme.colors.pink};
     border-radius: 20px;
   }
   }
