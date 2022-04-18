@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import styled from 'styled-components'
 import { UserContext } from '../App'
 import TestItem from './TestItem'
+import SearchBar from './SearchBar'
 
 const FlexGridDiv = styled.div`
   display: flex;
@@ -19,7 +20,6 @@ const TitleDiv = styled.div`
 `
 const ColumnHeaderDiv = styled.div`
   display: flex;
-  justify-content: space-evenly;
   gap: 50px;
 `
 const ColumnDiv = styled.div`
@@ -31,7 +31,7 @@ const ColumnHeaderSpan = styled.span`
   color: ${props => props.theme.colors.black};
 `
 const IconSpan = styled(ColumnHeaderSpan)`
-	width: 150px;
+	width: 200px;
 `
 const OwnerSpan = styled(ColumnHeaderSpan)`
 	width: 75px;
@@ -47,16 +47,31 @@ const StyledHr = styled.hr`
 
 function TestList() {
   const [tests, setTests] = useState([])
+  const [searchedTests, setSearchedTests] = useState([])
   const user = useContext(UserContext)
 
   useEffect(() => {
     fetch(`/users/${user.id}/tests`)
     .then(r => r.json())
-    .then((tests) => setTests(tests))
+    .then((tests) => {
+      setTests(tests)
+      setSearchedTests(tests)
+    })
   }, [])
+
+  function onSearchChange(text) {
+    const newTests = []
+    tests.forEach(test => {
+      if (test.title.toLowerCase().includes(text.toLowerCase())){
+        newTests.push(test)
+      }
+    })
+    setSearchedTests(newTests)
+  }
 
   return (
     <FlexGridDiv>
+      <ColumnDiv><SearchBar onSearchChange={onSearchChange}/></ColumnDiv>
       <ColumnDiv>
         <RowDiv>
           <TitleDiv>
@@ -71,7 +86,7 @@ function TestList() {
         </RowDiv>
       </ColumnDiv>
       <ColumnDiv><StyledHr/></ColumnDiv>
-      {tests?.map(test => {
+      {searchedTests?.map(test => {
         return <><TestItem key={test.id} test={test} /><ColumnDiv><StyledHr/></ColumnDiv> </>
       })}
     </FlexGridDiv>

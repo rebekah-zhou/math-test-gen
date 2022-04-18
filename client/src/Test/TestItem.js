@@ -26,7 +26,7 @@ const IconButton = styled.button`
 	border: none;
 `
 const IconSpan = styled.span`
-	width: 150px;
+	width: 200px;
 `
 const OwnerSpan = styled.span`
 	width: 75px;
