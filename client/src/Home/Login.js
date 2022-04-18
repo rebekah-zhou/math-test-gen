@@ -16,6 +16,8 @@ const XButton = styled.button`
   text-align: center;
   border: none;
   background: none;
+  color: black;
+  font-family: 'Roboto';
 `
 const VerticalForm = styled.form`
   display: flex;
@@ -26,6 +28,7 @@ const VerticalForm = styled.form`
 `
 const StyledSpan = styled.span`
   text-decoration: underline;
+  padding: 5px;
   &:hover {
     color: teal;
     cursor: pointer;

@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import logo from './math-test.png'
+import NewTest from '../NewTest/NewTest'
 import styled from "styled-components";
 
 const NavUnlisted = styled.ul`
   display: flex;
   background-color: ${props => props.theme.colors.blue};
   a {
+    display: flex;
     text-decoration: none;
+    align-items: center;
   }
   padding: 1rem;
 
@@ -28,8 +31,16 @@ const NavUnlisted = styled.ul`
   }
   }
 
+  button {
+    background-color: inherit;
+    padding: 0;
+    margin: 0;
+  }
+
   li > span {
     font-weight: bold;
+    display: flex;
+    align-items: center;
   }
 
   .nav-img {
@@ -40,7 +51,8 @@ const NavUnlisted = styled.ul`
 `
 
 function NavBar({ onLogout, user }) {
-  const id = 5
+  const [showNewTest, setShowNewTest] = useState(false)
+
   console.log(user)
   function handleLogout() {
     fetch('/logout', {
@@ -48,7 +60,13 @@ function NavBar({ onLogout, user }) {
     }).then(() => onLogout())
   }
 
+  function handleNewTestClick() {
+    setShowNewTest(true)
+  }
+
   return (
+    <>
+    {showNewTest ? <NewTest /> : null}
     <NavUnlisted>
       <NavLink to='/'>
         <li>
@@ -56,18 +74,19 @@ function NavBar({ onLogout, user }) {
           <img src={logo} className='nav-img' alt='logo'/>
         </li>
       </NavLink>
-      <NavLink to={`/test/${id}`}>
+      <button onClick={handleNewTestClick}>
         <li>
           Create New Test
         </li>
-      </NavLink>
-      <NavLink to='/test'>
-        <li> Tests </li>
-      </NavLink>
-      <NavLink to='/'>
-        <li onClick={handleLogout}> Logout </li>
-      </NavLink>
+      </button>
+        <NavLink to='/test'>
+          <li> Tests </li>
+        </NavLink>
+      <button onClick={handleLogout}>
+        <li > Logout </li>
+      </button>
     </NavUnlisted>
+    </>
   );
 }
 

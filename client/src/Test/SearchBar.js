@@ -40,15 +40,17 @@ function SearchBar({ onSearchChange }) {
 	}
 
   return (
-    <StyledForm>
-			<img src={searchIcon}></img>
-			<StyledSearchBar 
-				type='text'
-				placeholder='Search tests...'
-				value={searchText}
-				onChange={(e) => handleSearchChange(e.target.value)}
-			/>
-    </StyledForm>
+    <div style={{'padding': '10px 0px'}}>
+			<StyledForm>
+						<img src={searchIcon}></img>
+						<StyledSearchBar 
+							type='text'
+							placeholder='Search tests...'
+							value={searchText}
+							onChange={(e) => handleSearchChange(e.target.value)}
+						/>
+			</StyledForm>
+		</div>
   )
 }
 

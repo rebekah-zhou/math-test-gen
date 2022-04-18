@@ -50,14 +50,15 @@ function TestList() {
   const [searchedTests, setSearchedTests] = useState([])
   const user = useContext(UserContext)
 
-  useEffect(() => {
-    fetch(`/users/${user.id}/tests`)
-    .then(r => r.json())
-    .then((tests) => {
-      setTests(tests)
-      setSearchedTests(tests)
-    })
-  }, [])
+ useEffect(() => {
+  if (user) {
+    setTests(user.tests)
+    setSearchedTests(user.tests)
+    // if (user.tests.length < 1) {
+    //   setShowNewTest(true)
+    // }
+  }
+ }, [user])
 
   function onSearchChange(text) {
     const newTests = []
@@ -70,6 +71,7 @@ function TestList() {
   }
 
   return (
+    <>
     <FlexGridDiv>
       <ColumnDiv><SearchBar onSearchChange={onSearchChange}/></ColumnDiv>
       <ColumnDiv>
@@ -90,6 +92,7 @@ function TestList() {
         return <><TestItem key={test.id} test={test} /><ColumnDiv><StyledHr/></ColumnDiv> </>
       })}
     </FlexGridDiv>
+    </>
   )
 }
 
