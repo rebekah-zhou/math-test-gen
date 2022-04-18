@@ -62,7 +62,7 @@ function App() {
 
   return (
     <UserContext.Provider value={user}>
-      {showNavBar ? <NavBar onLogout={handleLogout} user={user} /> : null }
+      <NavBar onLogout={handleLogout} user={user} />
       {user ?
         <Routes>
           <Route path='/test/:id' element={<EditTest />} />

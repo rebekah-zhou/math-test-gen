@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import logo from './math-test.png'
 import NewTest from '../NewTest/NewTest'
 import styled from "styled-components";
 
 const NavUnlisted = styled.ul`
   display: flex;
-  background-color: ${props => props.theme.colors.blue};
+  background-color: ${props => props.theme.colors.black};
   a {
     display: flex;
     text-decoration: none;
     align-items: center;
   }
   padding: 1rem;
+  margin: 0;
 
   li {
     color: white;
@@ -25,8 +25,8 @@ const NavUnlisted = styled.ul`
     align-content: center;
     
   &:hover{
-    background-color: white;
-    color: ${props => props.theme.colors.pink};
+    background-color: ${props => props.theme.colors.cream};
+    color: ${props => props.theme.colors.black};
     border-radius: 20px;
   }
   }
@@ -71,7 +71,6 @@ function NavBar({ onLogout, user }) {
       <NavLink to='/'>
         <li>
           <span> Math Test Gen </span>
-          <img src={logo} className='nav-img' alt='logo'/>
         </li>
       </NavLink>
       <button onClick={handleNewTestClick}>
