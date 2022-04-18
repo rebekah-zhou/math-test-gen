@@ -16,6 +16,8 @@ const XButton = styled.button`
   text-align: center;
   border: none;
   background: none;
+  color: black;
+  font-family: 'Roboto';
 `
 const VerticalForm = styled.form`
   display: flex;
@@ -26,14 +28,15 @@ const VerticalForm = styled.form`
 `
 const StyledSpan = styled.span`
   text-decoration: underline;
+  padding: 5px;
   &:hover {
     color: teal;
     cursor: pointer;
   }
 `
 const StyledInput = styled.input`
-  border-radius: 3px;
-  margin: 5px 0px 20px;
+  border-radius: 4px;
+  margin: 6px 0px 20px;
   padding: 8px 10px;
   border-color: black;
   border: 0.01rem solid rgba(0, 0, 0, 0.25);

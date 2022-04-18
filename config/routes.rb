@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
   resources :sections
   resources :tests, only: [:show, :update]
+  resources :courses, only: [:show, :index]
 
   post "/login", to: "sessions#create"
   post "/signup", to: 'users#create'
