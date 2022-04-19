@@ -36,7 +36,20 @@ button {
   padding: 5px 10px;
   font-family: Roboto;
   font-size: large;
+  font-weight: bold;
 }
+
+input {
+  border-radius: 4px;
+  margin: 6px 0px 20px;
+  padding: 8px 10px;
+  border-color: black;
+  border: 0.01rem solid rgba(0, 0, 0, 0.25);
+  font-family: Roboto;
+  font-size: medium;
+
+}
+
 
 .App {
   text-align: center;

@@ -9,7 +9,7 @@ const StyledDiv = styled.div`
 
 function Question({ question }) {
   const {content, answers, difficulty, isMultipleChoice} = question
-  const shuffledAnswers = answers.shuffle
+  const shuffledAnswers = answers.shuffle()
   return (
     <li>
       <p>{content}</p>

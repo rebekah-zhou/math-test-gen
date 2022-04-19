@@ -14,7 +14,7 @@ function TestView({ test }) {
     <div className="vertical">
       <h1>{`${test.title}`}</h1>
       {/* Map the sections (when there's more) */}
-      <TestSection />
+      <TestSection test={test}/>
     </div>
   )
 }

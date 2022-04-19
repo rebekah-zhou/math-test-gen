@@ -7,7 +7,6 @@ import styled from 'styled-components'
 const StyledImg = styled.img`
   width: 100%;
   height: auto;
-  z-index: 1;
   object-fit: cover;
 `
 const StyledSpan = styled.h1`
@@ -18,7 +17,6 @@ const StyledSpan = styled.h1`
   text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
                0px 8px 13px rgba(0,0,0,0.1),
                0px 18px 23px rgba(0,0,0,0.1);
-  z-index: 2;
 `
 const Container = styled.div`
   width: 100%;
@@ -34,6 +32,7 @@ const StyledP = styled.p`
   width: 100%;
   height: auto;
   font-weight: bold;
+  font-size: large;
   color: white;
   text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
                0px 8px 13px rgba(0,0,0,0.1),

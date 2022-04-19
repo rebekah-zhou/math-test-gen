@@ -13,3 +13,8 @@ code {
   font-family: 'Roboto', source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: 'Lobster';
+  src: url('./Common/Lobster-Regular.ttf') format('truetype');
+}

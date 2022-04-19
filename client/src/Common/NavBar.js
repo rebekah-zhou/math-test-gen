@@ -3,8 +3,15 @@ import { NavLink } from 'react-router-dom'
 import NewTest from '../NewTest/NewTest'
 import styled from "styled-components";
 
+const StyledTitle = styled.span`
+  font-family: 'Lobster';
+  font-weight: 300;
+  font-size: xx-large;
+`
+
 const NavUnlisted = styled.ul`
   display: flex;
+  justify-content: space-between;
   background-color: ${props => props.theme.colors.black};
   a {
     display: flex;
@@ -19,6 +26,7 @@ const NavUnlisted = styled.ul`
     margin: 0 0.8rem;
     padding: 0.2rem 1rem;
     font-size: 1.3rem;
+    font-weight: bold;
     list-style: none;
     display: flex;
     justify-content: center;
@@ -70,20 +78,22 @@ function NavBar({ onLogout, user }) {
     <NavUnlisted>
       <NavLink to='/'>
         <li>
-          <span> Math Test Gen </span>
+          <StyledTitle> Math Test Gen </StyledTitle>
         </li>
       </NavLink>
-      <button onClick={handleNewTestClick}>
-        <li>
-          Create New Test
-        </li>
-      </button>
-        <NavLink to='/test'>
-          <li> Tests </li>
-        </NavLink>
-      <button onClick={handleLogout}>
-        <li > Logout </li>
-      </button>
+      <div className='horizontal'>
+        <button onClick={handleNewTestClick}>
+          <li>
+            Create New Test
+          </li>
+        </button>
+          <NavLink to='/test'>
+            <li> Tests </li>
+          </NavLink>
+        <button onClick={handleLogout}>
+          <li > Logout </li>
+        </button>
+      </div>
     </NavUnlisted>
     </>
   );

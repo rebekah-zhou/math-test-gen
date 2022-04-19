@@ -25,12 +25,13 @@ const VerticalForm = styled.form`
   justify-content: center;
   align-content: center;
   gap: 10px;
+  padding: 0px 10px;
 `
 const StyledSpan = styled.span`
   text-decoration: underline;
   padding: 5px;
   &:hover {
-    color: teal;
+    color: ${props => props.theme.colors.orange};
     cursor: pointer;
   }
 `
@@ -42,6 +43,9 @@ const StyledInput = styled.input`
   border: 0.01rem solid rgba(0, 0, 0, 0.25);
   font-family: Roboto;
   font-size: medium;
+`
+const Button = styled.button`
+  padding: 10px 20px;
 `
 const customStyles = {
   content: {
@@ -137,8 +141,8 @@ function Login({ onLogin }) {
 
   return (
     <div className='horizontal centered'>
-      <button onClick={() => openModal(true)}>Login</button>
-      <button onClick={() => openModal(false)}>Signup</button>
+      <Button onClick={() => openModal(true)}>Login</Button>
+      <Button onClick={() => openModal(false)}>Signup</Button>
       <Modal
         isOpen={isModalOpen}
         onRequestClose={closeModal}

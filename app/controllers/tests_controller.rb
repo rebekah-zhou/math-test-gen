@@ -16,7 +16,6 @@ class TestsController < ApplicationController
     def create
       test = Test.create(test_params)
       if test.valid?
-        session[:test_id] = test.id
         render json: test, status: :created
       else
         render json: { errors: test.errors.full_messages }, status: :unprocessable_entity
