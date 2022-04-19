@@ -19,12 +19,18 @@ const XButton = styled.button`
   color: black;
   font-family: 'Roboto';
 `
+const Button = styled.button`
+  color: inherit;
+  font-size: inherit;
+  &:hover {
+    color: inherit;
+  }
+`
 const InverseButton = styled.button`
   background-color: white;
   color: ${props => props.theme.colors.melon};
   border: 2px solid ${props => props.theme.colors.melon};
 `
-
 const customStyles = {
   content: {
     top: '50%',
@@ -43,7 +49,7 @@ const customStyles = {
 Modal.setAppElement('body')
 
 function NewTest() {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState("")
   const [standards, setStandards] = useState([])
   const [selectedStandards, setSelectedStandards] = useState([])
@@ -70,12 +76,14 @@ function NewTest() {
     setSelectedCourse(user.courses[id - 1])
   }
 
-  const courses = user.courses.map(course => {
+  let courses = []
+  if (user) {
+    courses = user.courses?.map(course => {
     return (<InverseButton 
       type='button'
       onClick={() => handleCourseClick(course.id)}>
       {course.name}</InverseButton>)
-  })
+  })}
 
   const standardOptions = standards?.map(standard => {
     return ({ value: standard.id, label: standard.notation })
@@ -127,6 +135,8 @@ function NewTest() {
   }
 
   return (
+    <>
+    <Button onClick={openModal}>Create New Test</Button>
     <Modal
       isOpen={isModalOpen}
       onRequestClose={closeModal}
@@ -154,22 +164,20 @@ function NewTest() {
             </div>
             {selectedCourse ? <button type='submit'>Select Standards {'>>'}</button> : null}
           </form>}
-        <form onSubmit={handleCreateSectionsClick}>
-          {showStandardsDropdown ?
-              <>
-              <h3>Select the standard(s):</h3>
-              <Select
-                options={standardOptions}
-                onChange={setSelectedStandards}
-                isMulti={true}
-                placeholder='Type or select...'/>
-              </>
-              : null
-          }
-          <button type='submit'>Generate Test!</button>
-        </form>
+        {showStandardsDropdown ? 
+          <form onSubmit={handleCreateSectionsClick}>
+            <h3>Select the standard(s):</h3>
+            <Select
+              options={standardOptions}
+              onChange={setSelectedStandards}
+              isMulti={true}
+              placeholder='Type or select...'/>
+            <button type='submit'>Generate Test!</button>
+          </form>
+        : null}
       </div>
     </Modal>
+    </>
   )
 }
 

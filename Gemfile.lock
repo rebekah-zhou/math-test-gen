@@ -151,6 +151,7 @@ GEM
     wicked_pdf (2.1.0)
       activesupport
     wkhtmltopdf-binary (0.12.6.5)
+    wkhtmltopdf-heroku (2.12.6.0)
     zeitwerk (2.5.4)
 
 PLATFORMS
@@ -169,6 +170,7 @@ DEPENDENCIES
   tzinfo-data
   wicked_pdf
   wkhtmltopdf-binary
+  wkhtmltopdf-heroku
 
 RUBY VERSION
    ruby 2.7.4p191

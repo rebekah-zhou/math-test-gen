@@ -74,7 +74,6 @@ function NavBar({ onLogout, user }) {
 
   return (
     <>
-    {showNewTest ? <NewTest /> : null}
     <NavUnlisted>
       <NavLink to='/'>
         <li>
@@ -82,11 +81,9 @@ function NavBar({ onLogout, user }) {
         </li>
       </NavLink>
       <div className='horizontal'>
-        <button onClick={handleNewTestClick}>
           <li>
-            Create New Test
+            <NewTest />
           </li>
-        </button>
           <NavLink to='/test'>
             <li> Tests </li>
           </NavLink>
