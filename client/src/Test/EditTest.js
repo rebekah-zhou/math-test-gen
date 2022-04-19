@@ -16,6 +16,8 @@ function Test() {
     .then(r => r.json())
     .then(test => setTest(test))
   }, [id])
+
+  console.log(test)
   
   function handleQuestionFetch(questionFormData, questionCount, title) {
     const questions = []

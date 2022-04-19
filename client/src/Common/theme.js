@@ -2,11 +2,11 @@
 
 export const theme = {
   colors: {
-    blue: '#455C7B',
-    purple: '#685C79',
-    magenta: '#AC6C82',
-    pink: '#DA727E',
-    yellow: '#FFBC67',
+    orange: '#BF4E24',
+    purple: '#65648C',
+    black: '#2E3140',
+    cream: '#D9C6B0',
+    melon: '#F29979',
 
   },
   fonts: ["Roboto"],
