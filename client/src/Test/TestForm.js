@@ -1,82 +1,78 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import FormSection from './FormSection'
 
 const VerticalForm = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
+  gap: 10px;
+`
+const Label = styled.label`
+  text-align: center;
+`
+const SectionTitle = styled.span`
+  font-size: large;
+  font-weight: bold;
+`
+const Container = styled.div`
+  padding: 20px;
+  background-color: white;
+`
+const SpanButton = styled.span`
+  cursor: pointer;
+  color: ${props => props.theme.colors.orange};
+  background: transparent;
 `
 
-function TestForm({ onFormSubmit }) {
-    const [questionFormData, setQuestionFormData] = useState({
-        isMultipleChoice: true,
-        difficulty: "easy",
-        section_id: 1,
-        standard_id: 129
-    })
-    const [title, setTitle] = useState("")
-    const [questionCount, setQuestionCount] = useState(1)
+function TestForm({ test, onFormSubmit, onEditTitle }) {
+  const [editTitle, setEditTitle] = useState(false)
+  const [title, setTitle] = useState("")
 
-    function handleSubmit(e) {
-        e.preventDefault()
-        onFormSubmit(questionFormData, questionCount, title)
-    }
+ 
+  function handleEditTitle() {
+    setEditTitle(false)
+    onEditTitle(title) 
+  }
+
+  const formSections = test.sections?.map((section, index) => {
+    const notation = section.instructions.split(":")
+    return (
+      <>
+      <SectionTitle>Section {`${index + 1}: ${notation[0]}`} </SectionTitle>
+      <FormSection section={section} onFormSubmit={onFormSubmit}/>
+      </>
+    )
+  })
+
   return (
-    <div>
-        <VerticalForm onSubmit={handleSubmit}>
-        <div className='horizontal'>
-          <label htmlFor='title'>Title:  </label>
-          <input
+    <Container>
+      <div>
+        <div className='vertical'>
+          <div className='horizontal'>
+            <label htmlFor='title'>Title:  </label>
+            
+            {editTitle ?
+              <div>
+                <SpanButton onClick={handleEditTitle}>Save</SpanButton>
+                <SpanButton onClick={() => setEditTitle(false)}>Cancel</SpanButton>
+              </div>
+            : <SpanButton onClick={() => setEditTitle(true)}>Edit Title</SpanButton>}
+          </div>
+          {editTitle ? <input
             type='text'
             name='title'
             id='title'
             placeholder=''
             value={title}
             onChange={e => setTitle(e.target.value)}
-            required
           />
+          : <span>{test.title}</span>}
         </div>
-        <div className='horizontal'>
-          <label htmlFor='questionCount' >Number of Questions:  </label>
-          <input
-            type='number'
-            name='questionCount'
-            id='questionCount'
-            placeholder='1'
-            min='1'
-            value={questionCount}
-            onChange={e => setQuestionCount(e.target.value)}
-            required
-          />
-        </div>
-        <div className="horizontal">
-            <div className='horizontal'>
-              <input
-                type='radio'
-                name='isMultipleChoice'
-                id='multipleChoice'
-                value={questionFormData.isMultipleChoice}
-                onChange={() => setQuestionFormData({...questionFormData, isMultipleChoice: true})}
-                required
-                />
-                <label htmlFor='multipleChoice'>Multiple Choice</label>
-            </div>
-            <div className='horizontal'>
-              <input
-                type='radio'
-                name='isMultipleChoice'
-                id='freeResponse'
-                value={questionFormData.isMultipleChoice}
-                onChange={() => setQuestionFormData({...questionFormData, isMultipleChoice: false})}
-                required
-                />
-                <label htmlFor='freeResponse'>Free Response</label>
-            </div>
-        </div>
-        <button type='submit'>Generate!</button>
-      </VerticalForm>
-    </div>
+        {formSections}
+      </div>
+    </Container>
   )
 }
 

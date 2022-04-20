@@ -7,6 +7,7 @@ import SearchBar from './SearchBar'
 const FlexGridDiv = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 20px 0 20px 20px;
 `
 const RowDiv = styled.div`
   display: flex;
@@ -52,13 +53,13 @@ function TestList() {
 
  useEffect(() => {
   if (user) {
-    setTests(user.tests)
-    setSearchedTests(user.tests)
-    // if (user.tests.length < 1) {
-    //   setShowNewTest(true)
-    // }
-  }
- }, [user])
+    fetch(`/users/${user.id}/tests`)
+    .then(r => r.json())
+    .then(testData => {
+      setTests(testData)
+      setSearchedTests(testData)
+    }
+  )}}, [])
 
   function onSearchChange(text) {
     const newTests = []

@@ -38,6 +38,12 @@ const DateSpan = styled.span`
 function TestItem({ test }) {
   const [isTestSelected, setIsTestSelected] = useState(false)
 
+  function handleDelete() {
+	fetch(`tests/${test.id}`, {
+		method: 'DELETE'
+	})
+  }
+
   return (
     <ColumnDiv>
 		<RowDiv>
@@ -57,7 +63,7 @@ function TestItem({ test }) {
 					{/* Add functionality */}
 					<IconButton><img src={copyIcon}></img></IconButton>
 					<IconButton><img src={downloadIcon}></img></IconButton>
-					<IconButton><img src={deleteIcon}></img></IconButton>
+					<IconButton onClick={handleDelete}><img src={deleteIcon}></img></IconButton>
 				</IconSpan>
 			</ColumnHeaderDiv>
 		</RowDiv>

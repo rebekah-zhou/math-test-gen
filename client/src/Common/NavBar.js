@@ -24,7 +24,7 @@ const NavUnlisted = styled.ul`
   li {
     color: white;
     margin: 0 0.8rem;
-    padding: 0.2rem 1rem;
+    padding: 0rem 1rem;
     font-size: 1.3rem;
     font-weight: bold;
     list-style: none;
@@ -41,6 +41,8 @@ const NavUnlisted = styled.ul`
 
   button {
     background-color: inherit;
+    color: inherit;
+    font-size: inherit;
     padding: 0;
     margin: 0;
   }
@@ -49,6 +51,7 @@ const NavUnlisted = styled.ul`
     font-weight: bold;
     display: flex;
     align-items: center;
+    height: 40px;
   }
 
   .nav-img {
@@ -59,7 +62,6 @@ const NavUnlisted = styled.ul`
 `
 
 function NavBar({ onLogout, user }) {
-  const [showNewTest, setShowNewTest] = useState(false)
 
   console.log(user)
   function handleLogout() {
@@ -68,9 +70,6 @@ function NavBar({ onLogout, user }) {
     }).then(() => onLogout())
   }
 
-  function handleNewTestClick() {
-    setShowNewTest(true)
-  }
 
   return (
     <>
@@ -85,11 +84,13 @@ function NavBar({ onLogout, user }) {
             <NewTest />
           </li>
           <NavLink to='/test'>
-            <li> Tests </li>
+            <li> <span>Tests</span> </li>
           </NavLink>
-        <button onClick={handleLogout}>
-          <li > Logout </li>
-        </button>
+        <li>
+          <button onClick={handleLogout}>
+          Logout
+          </button>
+        </li>
       </div>
     </NavUnlisted>
     </>

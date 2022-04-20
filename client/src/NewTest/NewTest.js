@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import Modal from 'react-modal';
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import Select from 'react-select'
 import { UserContext } from '../App';
@@ -8,6 +9,12 @@ const Horizontal = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+`
+const FlexForm = styled.form`
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
 `
 const XButton = styled.button`
   height: 20px;
@@ -21,7 +28,10 @@ const XButton = styled.button`
 `
 const Button = styled.button`
   color: inherit;
-  font-size: inherit;
+  font-size: 1.3rem;
+  padding: -0.3rem;
+  margin: -0.3rem;
+
   &:hover {
     color: inherit;
   }
@@ -30,6 +40,18 @@ const InverseButton = styled.button`
   background-color: white;
   color: ${props => props.theme.colors.melon};
   border: 2px solid ${props => props.theme.colors.melon};
+
+  &:hover {
+    color: white;
+    background-color: ${props => props.theme.colors.melon};
+    border: 2px solid ${props => props.theme.colors.melon};
+  }
+
+  &:focus {
+    color: white;
+    background-color: ${props => props.theme.colors.melon};
+    border: 2px solid ${props => props.theme.colors.melon};
+  }
 `
 const customStyles = {
   content: {
@@ -39,6 +61,8 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    minHeight: '400px',
+    minWidth: '300px'
   },
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
@@ -52,16 +76,19 @@ function NewTest() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState("")
   const [standards, setStandards] = useState([])
-  const [selectedStandards, setSelectedStandards] = useState([])
+  const [selectedStandards, setSelectedStandards] = useState(null)
   const [testTitle, setTestTitle] = useState('')
   const [test, setTest] = useState([])
   const [showStandardsDropdown, setShowStandardsDropdown] = useState(false)
   const user = useContext(UserContext)
+  const navigate = useNavigate()
 
   useEffect(() => {
-    fetch(`/courses/${selectedCourse.id}`)
-    .then(r => r.json())
-    .then(courses => setStandards(courses.standards))
+    if (selectedCourse) {
+      fetch(`/courses/${selectedCourse.id}`)
+      .then(r => r.json())
+      .then(courses => setStandards(courses.standards))
+    }
   }, [selectedCourse])
 
   function openModal() {
@@ -70,6 +97,11 @@ function NewTest() {
 
   function closeModal() {
     setIsModalOpen(false)
+    setSelectedCourse(null)
+    setStandards(null)
+    setSelectedStandards(null)
+    setTestTitle('')
+    setShowStandardsDropdown(false)
   }
 
   function handleCourseClick(id) {
@@ -80,6 +112,7 @@ function NewTest() {
   if (user) {
     courses = user.courses?.map(course => {
     return (<InverseButton 
+      key={course.id}
       type='button'
       onClick={() => handleCourseClick(course.id)}>
       {course.name}</InverseButton>)
@@ -90,6 +123,7 @@ function NewTest() {
   })
 
   function handleCreateNewTestClick(e) {
+    setShowStandardsDropdown(true)
     e.preventDefault();
 
     fetch(`/tests`, {
@@ -105,18 +139,19 @@ function NewTest() {
     .then(r => r.json())
     .then(testData => {
       setTest(testData)
-      setShowStandardsDropdown(true)
     })
   }
 
   function handleCreateSectionsClick(e) {
     e.preventDefault();
 
+    closeModal();
+
     const sections = []
 
     selectedStandards.forEach(standard => {
       sections.push({
-        instructions: standard.description,
+        instructions: `${standards[standard.value - 1].notation}: ${standards[standard.value - 1].description}`,
         test_id: test.id
       })
     })
@@ -130,7 +165,7 @@ function NewTest() {
       body: JSON.stringify(sectionObj)
     })
     .then(r => r.json())
-    .then(data => console.log(data))
+    .then(navigate(`/test/${test.id}`))
 
   }
 
@@ -148,7 +183,7 @@ function NewTest() {
         </Horizontal>
         {showStandardsDropdown ? 
           null: 
-          <form onSubmit={handleCreateNewTestClick}>
+          <FlexForm onSubmit={handleCreateNewTestClick}>
             <div className='vertical'>
               <label htmlFor='testTitle'>Test Title</label>
               <input 
@@ -158,22 +193,25 @@ function NewTest() {
                 onChange={e => setTestTitle(e.target.value)}
               />
             </div>
-            <h3>Select the course:</h3>
+            <label>Select the Course:</label>
             <div>
               {courses}
             </div>
-            {selectedCourse ? <button type='submit'>Select Standards {'>>'}</button> : null}
-          </form>}
+            {selectedCourse && testTitle ? <button type='submit'>Select Standards {'>>'}</button> : null}
+          </FlexForm>}
         {showStandardsDropdown ? 
-          <form onSubmit={handleCreateSectionsClick}>
-            <h3>Select the standard(s):</h3>
-            <Select
-              options={standardOptions}
-              onChange={setSelectedStandards}
-              isMulti={true}
-              placeholder='Type or select...'/>
-            <button type='submit'>Generate Test!</button>
-          </form>
+          <FlexForm onSubmit={handleCreateSectionsClick}>
+            <div>
+              <label>Select the Standard(s):</label>
+              <Select
+                options={standardOptions}
+                onChange={setSelectedStandards}
+                isMulti={true}
+                placeholder='Type or select...'
+              />
+            </div>
+            {selectedStandards ? <button type='submit'>Generate Test!</button> : null}
+          </FlexForm>
         : null}
       </div>
     </Modal>

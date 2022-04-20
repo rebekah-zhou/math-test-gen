@@ -6,7 +6,8 @@ const StyledForm = styled.form`
 	display: flex;
 	align-items: center;
 	padding-left: 10px;
-	margin: 0 500px 0 20px;
+	margin: 0 0 0 20px;
+	width: 30%;
 	border: 1px solid ${props => props.theme.colors.purple};
 	border-radius: 20px;
 

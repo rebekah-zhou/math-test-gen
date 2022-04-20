@@ -4,8 +4,11 @@ import TestForm from './TestForm'
 import TestView from './TestView'
 import styled from 'styled-components'
 
-export const QuestionsContext = createContext()
-
+const SplitDiv = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  background-color: ${props => props.theme.colors.cream};
+`
 function Test() {
   const [test, setTest] = useState([])
   const [questions, setQuestions] = useState([])
@@ -15,25 +18,15 @@ function Test() {
     fetch(`/tests/${id}`)
     .then(r => r.json())
     .then(test => setTest(test))
-  }, [id])
-
-  console.log(test)
+  }, [id, questions])
   
-  function handleQuestionFetch(questionFormData, questionCount, title) {
+  function handleQuestionFetch(questionFormData, questionCount) {
     const questions = []
 
     for(let i = 0; i < questionCount; i++) {
       questions.push(questionFormData)
     }
     const questionObj = {"questions": questions}
-    
-    fetch(`/tests/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({"title": title})
-    })
 
     fetch('/questions', {
       method: "POST",
@@ -51,18 +44,29 @@ function Test() {
         }
     })
   }
+  
+
+  function handleTitlePatch(title) {
+    fetch(`/tests/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({"title": title})
+    })
+    .then(r => r.json())
+    .then(data => setTest(data))
+  }
 
   if (!test) {
     return <h1></h1>
   }
 
   return (
-    <QuestionsContext.Provider value={questions}>
-      <div className='horizontal'>
-        <TestForm onFormSubmit={handleQuestionFetch}/>
-        <TestView test={test}/>
-      </div>
-    </QuestionsContext.Provider>
+    <SplitDiv>
+      <TestForm test={test} onEditTitle={handleTitlePatch} onFormSubmit={handleQuestionFetch}/>
+      <TestView test={test}/>
+    </SplitDiv>
   )
 }
 

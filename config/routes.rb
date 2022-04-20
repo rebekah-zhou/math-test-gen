@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :tests 
   end
   resources :sections
-  resources :tests, only: [:show, :update, :create]
+  resources :tests, only: [:show, :update, :create, :index, :destroy]
   resources :courses, only: [:show, :index]
 
   

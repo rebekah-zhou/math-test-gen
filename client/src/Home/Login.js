@@ -194,6 +194,7 @@ function Login({ onLogin }) {
                         options={stateOptions}
                         onChange={setSelectedState}
                         placeholder='Type or select...'
+                        
                       />
                     </div>
                     <div className='vertical' style={{'gap':'5px'}}>

@@ -7,6 +7,8 @@ export const theme = {
     black: '#2E3140',
     cream: '#D9C6B0',
     melon: '#F29979',
+    blue: '#ABAABF',
+    brown: '#736558'
 
   },
   fonts: ["Roboto"],

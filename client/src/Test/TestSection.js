@@ -1,16 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react'
 import QuestionItem from './QuestionItem'
 
-function TestSection({ test }) {
+function TestSection({ section }) {
 
-console.log(test)
+  console.log(section)
+  const questions = section.questions 
+  console.log(questions)
+
   return (
     <div className='vertical'>
-      <p>Instructions: Solve for the unknown variable.</p>
+      <p>Standard: {`${section.instructions}`}</p>
       <ol>
-        {/* {questions?.map(question => {
+        {questions?.map(question => {
           return <QuestionItem key={question.id} question={question}/>
-        })} */}
+        })}
       </ol>
     </div>
   )
