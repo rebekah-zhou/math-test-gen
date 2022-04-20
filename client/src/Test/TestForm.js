@@ -9,8 +9,15 @@ const VerticalForm = styled.form`
   align-content: center;
   gap: 10px;
 `
+const HorizontalDiv = styled.form`
+  display: flex;
+  justify-content: space-between;
+`
 const Label = styled.label`
   text-align: center;
+`
+const TitleLabel = styled.label` 
+  font-size: large;
 `
 const SectionTitle = styled.span`
   font-size: large;
@@ -42,22 +49,22 @@ function TestForm({ test, onFormSubmit, onEditTitle, onShuffle }) {
   const formSections = test.sections?.map((section, index) => {
     const notation = section.instructions.split(":")
     return (
-      <>
+      <div>
       <SectionTitle>Section {`${index + 1}: ${notation[0]}`} </SectionTitle>
       <div>
         <button onClick={() => onShuffle(section, "questions")}>Shuffle Questions & Answers!</button>
       </div>
       <FormSection section={section} onFormSubmit={onFormSubmit}/>
-      </>
+      </div>
     )
   })
 
   return (
     <Container>
-      <div>
-        <div className='vertical'>
-          <div className='horizontal'>
-            <label htmlFor='title'>Title:  </label>
+      <div className='vertical' style={{'gap': '50px'}}>
+        <div className='vertical' style={{'gap':'10px'}}>
+          <HorizontalDiv >
+            <TitleLabel htmlFor='title'>Title:  </TitleLabel>
             
             {editTitle ?
               <div>
@@ -65,7 +72,7 @@ function TestForm({ test, onFormSubmit, onEditTitle, onShuffle }) {
                 <SpanButton onClick={() => setEditTitle(false)}>Cancel</SpanButton>
               </div>
             : <SpanButton onClick={() => setEditTitle(true)}>Edit Title</SpanButton>}
-          </div>
+          </HorizontalDiv>
           {editTitle ? <input
             type='text'
             name='title'

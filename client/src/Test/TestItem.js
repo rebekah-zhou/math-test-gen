@@ -35,12 +35,20 @@ const DateSpan = styled.span`
 	width: 125px;
 `
 
-function TestItem({ test }) {
+function TestItem({ test, onDelete }) {
   const [isTestSelected, setIsTestSelected] = useState(false)
 
   function handleDelete() {
 	fetch(`tests/${test.id}`, {
 		method: 'DELETE'
+	})
+	.then(r => {
+		if (r.ok) {
+			onDelete(test)
+		} else {
+			r.json()
+			.then((data) => console.log(data))
+		}
 	})
   }
 

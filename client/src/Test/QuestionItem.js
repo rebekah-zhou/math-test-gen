@@ -21,7 +21,6 @@ const StyledP = styled.p`
 function QuestionItem({ question }) {
   const {content, answers, difficulty, isMultipleChoice} = question
   const [shuffledAnswers, setShuffledAnswers] = useState([])
-  const [doTheShuffle, setDoTheShuffle] = useState(false)
 
   function shuffle(array) {
     let currentIndex = array.length,  randomIndex;
@@ -41,26 +40,19 @@ function QuestionItem({ question }) {
   }
 
   useEffect(() => {
-    if (question) {
-      setShuffledAnswers(() => shuffle(answers))
-    }
+    setShuffledAnswers(shuffle(answers))
   }, [question])
-
-  // console.log(shuffledAnswers)
-  if (doTheShuffle) {
-    setShuffledAnswers(() => shuffle(shuffledAnswers))
-    setDoTheShuffle(false)
-  }
 
   return (
     <StyledLi>
       <StyledP>{content}</StyledP>
-      <StyledDiv>
+      {isMultipleChoice ? <StyledDiv>
         <span>A. {shuffledAnswers[0]?.content} </span>
         <span>B. {shuffledAnswers[1]?.content} </span>
         <span>C. {shuffledAnswers[2]?.content}</span>
         <span>D. {shuffledAnswers[3]?.content}</span>
       </StyledDiv>
+      : <div style={{'height':'50px'}}></div>}
     </StyledLi>
   )
 }

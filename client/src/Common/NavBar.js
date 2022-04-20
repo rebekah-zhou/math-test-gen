@@ -79,7 +79,7 @@ function NavBar({ onLogout, user }) {
           <StyledTitle> Math Test Gen </StyledTitle>
         </li>
       </NavLink>
-      <div className='horizontal'>
+      {user ? <div className='horizontal'>
           <li>
             <NewTest />
           </li>
@@ -91,7 +91,7 @@ function NavBar({ onLogout, user }) {
           Logout
           </button>
         </li>
-      </div>
+      </div> : null}
     </NavUnlisted>
     </>
   );
