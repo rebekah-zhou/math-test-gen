@@ -1,20 +1,42 @@
 import React, { useContext, useEffect, useState } from 'react'
 import QuestionItem from './QuestionItem'
+import styled from 'styled-components'
+import { ShuffledQuestionsContext } from './EditTest'
+
+const FlexGrid = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+`
+const Ol = styled.ol`
+  padding: 0;
+`
 
 function TestSection({ section }) {
+  const questions = section.questions
+  const shuffledQs = useContext(ShuffledQuestionsContext)
+  let questionsToShow = []
 
-  console.log(section)
-  const questions = section.questions 
-  console.log(questions)
+  if (shuffledQs) {
+    if (shuffledQs[0].section.id === section.id) {
+      questionsToShow = shuffledQs?.map(question => {
+        return <QuestionItem key={question.id} question={question}/>
+      })
+    } 
+  } else {
+      questionsToShow = questions?.map(question => {
+        return <QuestionItem key={question.id} question={question}/>
+      })
+    }
 
   return (
     <div className='vertical'>
       <p>Standard: {`${section.instructions}`}</p>
-      <ol>
-        {questions?.map(question => {
-          return <QuestionItem key={question.id} question={question}/>
-        })}
-      </ol>
+        <Ol>
+          <FlexGrid>
+            {questionsToShow}
+          </FlexGrid>
+        </Ol>
     </div>
   )
 }

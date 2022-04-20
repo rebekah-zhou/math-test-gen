@@ -4,6 +4,8 @@ import TestForm from './TestForm'
 import TestView from './TestView'
 import styled from 'styled-components'
 
+export const ShuffledQuestionsContext = createContext()
+
 const SplitDiv = styled.div`
   display: flex;
   justify-content: space-evenly;
@@ -12,6 +14,8 @@ const SplitDiv = styled.div`
 function Test() {
   const [test, setTest] = useState([])
   const [questions, setQuestions] = useState([])
+  const [shuffledQuestions, setShuffledQuestions] = useState(null)
+  const [shuffledAnswers, setShuffledAnswers] = useState(null)
   const { id } = useParams()
 
   useEffect(() => {
@@ -45,6 +49,13 @@ function Test() {
     })
   }
   
+  function handleShuffle(section, whatToShuffle) {
+    if (whatToShuffle === "questions") {
+      fetch(`/sections/${section.id}/shufflequestions`)
+      .then(r => r.json())
+      .then(data => setShuffledQuestions(data))
+    }
+  }
 
   function handleTitlePatch(title) {
     fetch(`/tests/${id}`, {
@@ -63,10 +74,17 @@ function Test() {
   }
 
   return (
-    <SplitDiv>
-      <TestForm test={test} onEditTitle={handleTitlePatch} onFormSubmit={handleQuestionFetch}/>
-      <TestView test={test}/>
-    </SplitDiv>
+    <ShuffledQuestionsContext.Provider value={shuffledQuestions}>
+      <SplitDiv>
+        <TestForm
+          test={test}
+          onEditTitle={handleTitlePatch}
+          onFormSubmit={handleQuestionFetch}
+          onShuffle={handleShuffle}
+          />
+        <TestView test={test} />
+      </SplitDiv>
+    </ShuffledQuestionsContext.Provider>
   )
 }
 

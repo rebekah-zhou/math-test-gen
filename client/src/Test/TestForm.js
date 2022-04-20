@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, createContext } from 'react'
 import styled from 'styled-components'
 import FormSection from './FormSection'
 
@@ -26,9 +26,10 @@ const SpanButton = styled.span`
   background: transparent;
 `
 
-function TestForm({ test, onFormSubmit, onEditTitle }) {
+function TestForm({ test, onFormSubmit, onEditTitle, onShuffle }) {
   const [editTitle, setEditTitle] = useState(false)
   const [title, setTitle] = useState("")
+
 
  
   function handleEditTitle() {
@@ -36,11 +37,16 @@ function TestForm({ test, onFormSubmit, onEditTitle }) {
     onEditTitle(title) 
   }
 
+ 
+
   const formSections = test.sections?.map((section, index) => {
     const notation = section.instructions.split(":")
     return (
       <>
       <SectionTitle>Section {`${index + 1}: ${notation[0]}`} </SectionTitle>
+      <div>
+        <button onClick={() => onShuffle(section, "questions")}>Shuffle Questions & Answers!</button>
+      </div>
       <FormSection section={section} onFormSubmit={onFormSubmit}/>
       </>
     )

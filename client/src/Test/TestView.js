@@ -15,6 +15,10 @@ const SectionTitle = styled.span`
   font-size: large;
   font-weight: bold;
 `
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
 function TestView({ test }) {
 
   // Another useEffect for questions
@@ -24,18 +28,22 @@ function TestView({ test }) {
   }
 
   const sections = test.sections?.map((section, index) => {
-    return (
+      return (
       <div>
-        <SectionTitle>Section {`${index + 1}`}</SectionTitle>
+        <SectionTitle key={index}>Section {`${index + 1}`}</SectionTitle>
         <TestSection section={section} key={section.id} />
       </div>)
-  })
-
-  console.log(test)
+    })
 
   return (
     <LetterDiv>
-      <h1>{`${test.title}`}</h1>
+      <Header>
+        <h1>{`${test.title}`}</h1>
+        <div>
+          <p>Name: ____________________________</p>
+          <p>Period: _____ Date: ________________</p>
+        </div>
+      </Header>
       {sections}
     </LetterDiv>
   )

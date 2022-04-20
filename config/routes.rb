@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   resources :questions, only: [:index, :show, :create, :destroy]
   resources :sections do
     resources :questions, only: [:index, :show]
+    get '/shufflequestions', to: "sections#shuffle_questions"
+    get '/shuffleanswers', to: "sections#shuffle_answers"
   end
   resources :users do
     resources :tests 
@@ -10,7 +12,6 @@ Rails.application.routes.draw do
   resources :tests, only: [:show, :update, :create, :index, :destroy]
   resources :courses, only: [:show, :index]
 
-  
   post "/login", to: "sessions#create"
   post "/signup", to: 'users#create'
   get "/me", to: "users#show_me"

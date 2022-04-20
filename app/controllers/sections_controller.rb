@@ -36,6 +36,11 @@ class SectionsController < ApplicationController
         head :no_content
     end
 
+    def shuffle_questions 
+      section = Section.find(params[:section_id])
+      render json: section.questions.shuffle()
+    end
+
 private
 
     def sections_params
