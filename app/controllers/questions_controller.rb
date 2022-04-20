@@ -13,14 +13,9 @@ class QuestionsController < ApplicationController
             Question.transaction do
                 @questions = Question.create!(questions_params)
                 @questions.each do |question| 
-                    case question.section_id
-                    when 1
-                        equation_data = question.create_onestep_equation
-                        question.update(content: equation_data[:equation])
-                        onestep_answer_choice_logic(equation_data, question)
-                    else
-                        render json: { error: "There's no logic for this question's section!" }, status: unprocessable_entity
-                    end
+                    equation_data = question.create_onestep_equation
+                    question.update(content: equation_data[:equation])
+                    onestep_answer_choice_logic(equation_data, question)
                 end
             end
         rescue ActiveRecord::RecordInvalid => exception

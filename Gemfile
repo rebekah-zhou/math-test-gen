@@ -16,9 +16,13 @@ gem 'bcrypt'
 # gem 'rack-cors'
 gem 'active_model_serializers'
 # PDF generation
-gem 'wicked_pdf'
-# wicked_pdf is a wrapper for the following
-gem 'wkhtmltopdf-binary'
+# gem 'wicked_pdf'
+# # wicked_pdf is a wrapper for the following
+# gem 'wkhtmltopdf-binary', group: :development
+# gem "wkhtmltopdf-heroku", group: :production
+
+# gem allowing nullify then purge 
+# gem 'miss_hannigan'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false

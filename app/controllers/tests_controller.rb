@@ -1,13 +1,14 @@
 class TestsController < ApplicationController
     def index
         tests = Test.all
-        render json: tests, include: ['sections', 'sections.questions']
+        sorted_tests = tests.sort_by { |test| test.updated_at }
+        render json: sorted_tests.reverse, include: ['sections', 'sections.questions']
     end
 
     def show
         test = Test.find(params[:id])
         if test
-          render json: test, include: ['sections', 'sections.questions']
+          render json: test, include: ['sections', 'sections.questions', 'sections.questions.answers']
         else
           render json: { error: "test not found" }, status: :not_found
         end
