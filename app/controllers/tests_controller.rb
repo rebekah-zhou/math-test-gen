@@ -31,7 +31,7 @@ class TestsController < ApplicationController
 
     def destroy
         test = Test.find(params[:id])
-        test.delete
+        test.destroy
         head :no_content
     end
 

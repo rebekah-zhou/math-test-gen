@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import Login from './Login'
 import { UserContext } from './../App'
-import LandingPhoto from '../Home/LandingPhoto.jpeg'
+import LandingPhoto from '../Home/LandingPhoto.png'
 import styled from 'styled-components'
 
 const StyledImg = styled.img`
@@ -43,6 +43,7 @@ function Home({ onLogin }) {
   const user = useContext(UserContext)
 
   return (
+    <>
     <Container> 
       <Box>
         <div className="horizontal centered">
@@ -56,8 +57,20 @@ function Home({ onLogin }) {
           </div>
         </div>
       </Box>
+      <section class="rw-wrapper">
+    <h2 class="rw-sentence">					
+      <div class="rw-words rw-words-1">
+        <span>9t = 2 - a</span>
+        <span>r - 3 = 10</span>
+        <span>6*q = 54</span>
+        <span>y = 3x + 1</span>
+        <span>t + 4 = 3</span>
+      </div>
+    </h2>
+  </section>
       <StyledImg src={LandingPhoto} alt='background'></StyledImg>
     </Container>
+    </>
   )
 }
 

@@ -13,8 +13,8 @@ const Ol = styled.ol`
 `
 
 function TestSection({ section }) {
-  const questions = section.questions
   const shuffledQs = useContext(ShuffledQuestionsContext)
+  const questions = section.questions
   let questionsToShow = []
 
   if (shuffledQs) {
@@ -22,7 +22,11 @@ function TestSection({ section }) {
       questionsToShow = shuffledQs?.map(question => {
         return <QuestionItem key={question.id} question={question}/>
       })
-    } 
+    } else {
+      questionsToShow = questions?.map(question => {
+        return <QuestionItem key={question.id} question={question}/>
+      })
+    }
   } else {
       questionsToShow = questions?.map(question => {
         return <QuestionItem key={question.id} question={question}/>

@@ -48,8 +48,8 @@ const StyledHr = styled.hr`
 
 function TestList() {
   const [tests, setTests] = useState([])
-  const [searchedTests, setSearchedTests] = useState([])
   const user = useContext(UserContext)
+  const [searchBarValue, setSearchBarValue] = useState("")
 
  useEffect(() => {
   if (user) {
@@ -57,24 +57,22 @@ function TestList() {
     .then(r => r.json())
     .then(testData => {
       setTests(testData)
-      setSearchedTests(testData)
     }
   )}}, [])
 
-  function onSearchChange(text) {
-    const newTests = []
-    tests.forEach(test => {
-      if (test.title.toLowerCase().includes(text.toLowerCase())){
-        newTests.push(test)
-      }
-    })
-    setSearchedTests(newTests)
+  function onDelete(deletedTest) {
+    const updatedTests = tests.filter(test => test.id !== deletedTest.id)
+    setTests(updatedTests)
   }
+
+  const testsToDisplay = tests.filter(test => {
+    return test.title.toLowerCase().includes(searchBarValue?.toLowerCase())
+  })
 
   return (
     <>
     <FlexGridDiv>
-      <ColumnDiv><SearchBar onSearchChange={onSearchChange}/></ColumnDiv>
+      <ColumnDiv><SearchBar onSearchChange={setSearchBarValue}/></ColumnDiv>
       <ColumnDiv>
         <RowDiv>
           <TitleDiv>
@@ -89,8 +87,8 @@ function TestList() {
         </RowDiv>
       </ColumnDiv>
       <ColumnDiv><StyledHr/></ColumnDiv>
-      {searchedTests?.map(test => {
-        return <><TestItem key={test.id} test={test} /><ColumnDiv><StyledHr/></ColumnDiv> </>
+      {testsToDisplay?.map(test => {
+        return <><TestItem key={test.id} test={test} onDelete={onDelete} /><ColumnDiv><StyledHr/></ColumnDiv> </>
       })}
     </FlexGridDiv>
     </>

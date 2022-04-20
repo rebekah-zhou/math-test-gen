@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 const FormSectionForm = styled.form`
-  border: 1px solid ${props => props.theme.colors.blue};
+  border: 2px solid ${props => props.theme.colors.blue};
   padding: 10px;
   border-radius: 20px;
 `
 const Input = styled.input`
-  margin: 0;
+  margin: 0 10px 10px;
 `
 const Label = styled.label`
   text-align: center;
@@ -31,7 +31,7 @@ function FormSection({ section, onFormSubmit }) {
   return (
     <FormSectionForm onSubmit={handleSubmit}>
       <div className='vertical'>
-        <Label htmlFor='questionCount'>Number of Questions  </Label>
+        <Label htmlFor='questionCount'>Number of questions to add?</Label>
         <Input
           type='number'
           name='questionCount'
@@ -48,23 +48,23 @@ function FormSection({ section, onFormSubmit }) {
           <Input
             type='radio'
             name='isMultipleChoice'
-            id='multipleChoice'
+            id={`multipleChoice${section.id}`}
             value={questionFormData.isMultipleChoice}
             onChange={() => setQuestionFormData({...questionFormData, isMultipleChoice: true, section_id: section.id})}
             required
           />
-            <Label htmlFor='multipleChoice'>Multiple Choice</Label>
+            <Label htmlFor={`multipleChoice${section.id}`}>Multiple Choice</Label>
         </div>
         <div className='horizontal centered'>
           <Input
             type='radio'
             name='isMultipleChoice'
-            id='freeResponse'
+            id={`freeResponse${section.id}`}
             value={questionFormData.isMultipleChoice}
             onChange={() => setQuestionFormData({...questionFormData, isMultipleChoice: false, section_id: section.id})}
             required
           />
-          <Label htmlFor='freeResponse'>Free Response</Label>
+          <Label htmlFor={`freeResponse${section.id}`}>Free Response</Label>
         </div>
       </div>
       <button type='submit'>Generate questions!</button>

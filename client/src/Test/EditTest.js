@@ -15,7 +15,6 @@ function Test() {
   const [test, setTest] = useState([])
   const [questions, setQuestions] = useState([])
   const [shuffledQuestions, setShuffledQuestions] = useState(null)
-  const [shuffledAnswers, setShuffledAnswers] = useState(null)
   const { id } = useParams()
 
   useEffect(() => {
@@ -50,11 +49,9 @@ function Test() {
   }
   
   function handleShuffle(section, whatToShuffle) {
-    if (whatToShuffle === "questions") {
-      fetch(`/sections/${section.id}/shufflequestions`)
+    fetch(`/sections/${section.id}/shufflequestions`)
       .then(r => r.json())
       .then(data => setShuffledQuestions(data))
-    }
   }
 
   function handleTitlePatch(title) {
