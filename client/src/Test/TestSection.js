@@ -35,7 +35,7 @@ function TestSection({ section }) {
 
   return (
     <div className='vertical'>
-      <p>Standard: {`${section.instructions}`}</p>
+      <p>{`${section.instructions}`}</p>
         <Ol>
           <FlexGrid>
             {questionsToShow}

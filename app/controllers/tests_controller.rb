@@ -5,6 +5,13 @@ class TestsController < ApplicationController
         render json: sorted_tests.reverse, include: ['sections', 'sections.questions']
     end
 
+    def index_user
+      user = User.find(params[:user_id])
+      tests = user.tests
+      sorted_tests = tests.sort_by { |test| test.updated_at }
+      render json: sorted_tests.reverse, include: ['sections', 'sections.questions']
+    end
+
     def show
         test = Test.find(params[:id])
         if test

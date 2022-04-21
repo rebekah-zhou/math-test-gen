@@ -164,7 +164,7 @@ button {
   margin: 5px;
   padding: 5px 10px;
   font-family: Roboto;
-  font-size: large;
+  font-size: calc(12px + 0.2vw);
   font-weight: bold;
 }
 

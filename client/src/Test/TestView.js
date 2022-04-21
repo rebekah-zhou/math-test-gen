@@ -7,9 +7,11 @@ const LetterDiv = styled.div`
   flex-direction: column;
   aspect-ratio: 8.5/11;
   max-width: 40%;
-  border: 1px solid black;
+  border: 1px solid grey;
   padding: 40px;
+  margin-top: 40px;
   background-color: white;
+  box-shadow: 10px 5px 20px grey;
 `
 const SectionTitle = styled.span`
   font-size: large;
@@ -39,7 +41,7 @@ function TestView({ test }) {
     <LetterDiv>
       <Header>
         <h1>{`${test.title}`}</h1>
-        <div>
+        <div style={{'width':'35%'}}>
           <p>Name: ____________________________</p>
           <p>Period: _____ Date: ________________</p>
         </div>
