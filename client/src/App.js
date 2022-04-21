@@ -10,7 +10,6 @@ export const UserContext = createContext()
 
 function App() {
   const [user, setUser] = useState(null);
-  const [showNavBar, setShowNavBar] = useState(false)
   const [pageLoaded, setPageLoaded] = useState(false)
   const navigate = useNavigate()
   const state = useLocation()
@@ -31,27 +30,48 @@ function App() {
     
   useEffect(() => {
     if(user) {
-      setShowNavBar(true)
       setPageLoaded(true)
     }
   }, [user])
   
-  function handleLogin(user) {
-    setShowNavBar(true)
-    setUser(() => user)
+  console.log(user)
+  function handleLogin(user, selectedCourses) {
+    if (selectedCourses) {
+      const userCourses = []
+
+      const coursesArr = selectedCourses?.map(course => {
+        return {"id": course.value, "name": course.label}
+      })
+      setUser({...user, courses: coursesArr})
+
+      selectedCourses.forEach(course => {
+        userCourses.push({
+          user_id: user.id,
+          course_id: course.value
+        })
+      })
+
+      const userCourseObj = {"userCourses": userCourses}
+
+      fetch('/user_courses', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userCourseObj)
+      })
+    } else {
+      setUser(() => user)
+    }
+    
     const path = state?.pathname 
-    // if (path === '/') {
-    //   navigate('/test')
-    // } else {
-    //   navigate(path)
-    // }
+
     if (path === '/') {
       navigate('/test')
     } 
   }
   
   function handleLogout() {
-    setShowNavBar(false)
     setUser(null)
     navigate('/')
   }
@@ -62,7 +82,7 @@ function App() {
 
   return (
     <UserContext.Provider value={user}>
-      <NavBar onLogout={handleLogout} user={user} />
+      <NavBar onLogout={handleLogout} />
       {user ?
         <Routes>
           <Route path='/test/:id' element={<EditTest />} />

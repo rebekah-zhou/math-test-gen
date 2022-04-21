@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Modal from 'react-modal';
 import styled from 'styled-components'
 import Select from 'react-select'
@@ -62,13 +62,12 @@ const customStyles = {
   }
 };
 
-const courses = ["Algebra I", "Algebra II", "Geometry", "Integrated Math I",
+const courses = ["Algebra I", "Geometry", "Algebra II", "Integrated Math I",
   "Integrated Math II", "Integrated Math III", "Bridge Math", "Precalculus", 
   "Statistics", "Applied Mathemtaical Concepts", "Calculus"]
 const stateOptions = states.map(state => ({ value: state.abbreviation, label: state.name }))
-const courseOptions = courses.map(course => {
-  const courseValue = course.toLowerCase().replace(/\s+\g, ''/)
-  return ({ value: courseValue, label: course })
+const courseOptions = courses.map((course, index) => {
+   return ({ value: index + 1, label: course })
 })
 
 Modal.setAppElement('body')
@@ -81,7 +80,10 @@ function Login({ onLogin }) {
   const [passwordConfirmation, setPasswordConfirmation] = useState('') 
   const [errorMsgs, setErrorMsgs] = useState([])
   const [selectedState, setSelectedState] = useState(null);
-  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [selectedCourses, setSelectedCourses] = useState(null);
+  
+  console.log(selectedCourses)
+
 
   function openModal(loginOrSignup) {
     setShowLogin(loginOrSignup)
@@ -106,7 +108,9 @@ function Login({ onLogin }) {
       .then(r => {
         if (r.ok) {
           r.json()
-          .then((user) => onLogin(user))
+          .then((user) => {
+            onLogin(user, selectedCourses)
+          })
         } else {
           r.json().then(data => setErrorMsgs(() => data[routeString === '/login' ? 'error' : 'errors']))
         }
@@ -121,7 +125,8 @@ function Login({ onLogin }) {
       submitFetch({ 
         username, 
         password, 
-        password_confirmation: passwordConfirmation
+        password_confirmation: passwordConfirmation,
+        bio: selectedState
       }, '/signup')
     }
   }
@@ -201,7 +206,7 @@ function Login({ onLogin }) {
                       <label>Which courses do you teach?</label>
                       <Select 
                         options={courseOptions} 
-                        onChange={setSelectedCourse}
+                        onChange={setSelectedCourses}
                         placeholder='Type or select...' 
                         isMulti={true}
                       />

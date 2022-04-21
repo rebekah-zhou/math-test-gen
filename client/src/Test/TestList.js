@@ -51,14 +51,14 @@ function TestList() {
   const user = useContext(UserContext)
   const [searchBarValue, setSearchBarValue] = useState("")
 
+
  useEffect(() => {
   if (user) {
     fetch(`/users/${user.id}/tests`)
     .then(r => r.json())
-    .then(testData => {
-      setTests(testData)
-    }
-  )}}, [])
+    .then(testdata => setTests(testdata))
+  }
+}, [user])
 
   function onDelete(deletedTest) {
     const updatedTests = tests.filter(test => test.id !== deletedTest.id)

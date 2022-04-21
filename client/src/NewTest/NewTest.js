@@ -82,7 +82,8 @@ function NewTest() {
   const [showStandardsDropdown, setShowStandardsDropdown] = useState(false)
   const user = useContext(UserContext)
   const navigate = useNavigate()
-
+  console.log(standards)
+  console.log(selectedCourse)
   useEffect(() => {
     if (selectedCourse) {
       fetch(`/courses/${selectedCourse.id}`)
@@ -104,17 +105,17 @@ function NewTest() {
     setShowStandardsDropdown(false)
   }
 
-  function handleCourseClick(id) {
-    setSelectedCourse(user.courses[id - 1])
+  function handleCourseClick(index) {
+    setSelectedCourse(user.courses[index])
   }
 
   let courses = []
   if (user) {
-    courses = user.courses?.map(course => {
+    courses = user.courses?.map((course, index) => {
     return (<InverseButton 
-      key={course.id}
+      key={index}
       type='button'
-      onClick={() => handleCourseClick(course.id)}>
+      onClick={() => handleCourseClick(index)}>
       {course.name}</InverseButton>)
   })}
 
@@ -150,8 +151,10 @@ function NewTest() {
     const sections = []
 
     selectedStandards.forEach(standard => {
+      const std = standards.find(s => s.id === standard.value)
+      console.log(std)
       sections.push({
-        instructions: `${standards[standard.value - 1].notation}: ${standards[standard.value - 1].description}`,
+        instructions: `${std?.notation}: ${std?.description}`,
         test_id: test.id
       })
     })

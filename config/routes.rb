@@ -6,11 +6,12 @@ Rails.application.routes.draw do
     get '/shuffleanswers', to: "sections#shuffle_answers"
   end
   resources :users do
-    resources :tests 
+    get '/tests', to: 'tests#index_user'
   end
   resources :sections
   resources :tests, only: [:show, :update, :create, :index, :destroy]
   resources :courses, only: [:show, :index]
+  resources :user_courses
 
   post "/login", to: "sessions#create"
   post "/signup", to: 'users#create'

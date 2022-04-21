@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import NewTest from '../NewTest/NewTest'
 import styled from "styled-components";
+import { UserContext } from '../App';
 
 const StyledTitle = styled.span`
   font-family: 'Lobster';
@@ -61,9 +62,10 @@ const NavUnlisted = styled.ul`
 
 `
 
-function NavBar({ onLogout, user }) {
+function NavBar({ onLogout }) {
 
-  console.log(user)
+  const user = useContext(UserContext)
+
   function handleLogout() {
     fetch('/logout', {
       method: 'DELETE',
