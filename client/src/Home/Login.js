@@ -95,7 +95,7 @@ function Login({ onLogin }) {
   }
 
   function submitFetch(userObj, routeString) { 
-    fetch(routeString, {
+    fetch(`https://math-test-gen.herokuapp.com${routeString}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

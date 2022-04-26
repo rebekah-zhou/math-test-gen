@@ -39,7 +39,7 @@ function TestItem({ test, onDelete }) {
   const [isTestSelected, setIsTestSelected] = useState(false)
 
   function handleDelete() {
-	fetch(`tests/${test.id}`, {
+	fetch(`https://math-test-gen.herokuapp.com/tests/${test.id}`, {
 		method: 'DELETE'
 	})
 	.then(r => {

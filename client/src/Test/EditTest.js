@@ -18,7 +18,7 @@ function Test() {
   const { id } = useParams()
 
   useEffect(() => {
-    fetch(`/tests/${id}`)
+    fetch(`https://math-test-gen.herokuapp.com/tests/${id}`)
     .then(r => r.json())
     .then(test => setTest(test))
   }, [id, questions])
@@ -31,7 +31,7 @@ function Test() {
     }
     const questionObj = {"questions": questions}
 
-    fetch('/questions', {
+    fetch('https://math-test-gen.herokuapp.com/questions', {
       method: "POST",
       headers: {
       "Content-Type": "application/json",
@@ -49,13 +49,13 @@ function Test() {
   }
   
   function handleShuffle(section, whatToShuffle) {
-    fetch(`/sections/${section.id}/shufflequestions`)
+    fetch(`https://math-test-gen.herokuapp.com/sections/${section.id}/shufflequestions`)
       .then(r => r.json())
       .then(data => setShuffledQuestions(data))
   }
 
   function handleTitlePatch(title) {
-    fetch(`/tests/${id}`, {
+    fetch(`https://math-test-gen.herokuapp.com/tests/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

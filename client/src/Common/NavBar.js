@@ -67,7 +67,7 @@ function NavBar({ onLogout }) {
   const user = useContext(UserContext)
 
   function handleLogout() {
-    fetch('/logout', {
+    fetch('/https://math-test-gen.herokuapp.com/logout', {
       method: 'DELETE',
     }).then(() => onLogout())
   }
@@ -76,7 +76,7 @@ function NavBar({ onLogout }) {
   return (
     <>
     <NavUnlisted>
-      <NavLink to='/'>
+      <NavLink to='/math-test-gen'>
         <li>
           <StyledTitle> Math Test Gen </StyledTitle>
         </li>
@@ -85,7 +85,7 @@ function NavBar({ onLogout }) {
           <li>
             <NewTest />
           </li>
-          <NavLink to='/test'>
+          <NavLink to='/math-test-gen/test'>
             <li> <span>Tests</span> </li>
           </NavLink>
         <li>
