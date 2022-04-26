@@ -34,7 +34,6 @@ function App() {
     }
   }, [user])
   
-  console.log(user)
   function handleLogin(user, selectedCourses) {
     if (selectedCourses) {
       const userCourses = []
