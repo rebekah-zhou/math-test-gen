@@ -12,10 +12,13 @@
 
 ActiveRecord::Schema.define(version: 2022_04_15_221306) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "answers", force: :cascade do |t|
     t.string "content"
     t.boolean "isCorrect"
-    t.integer "question_id", null: false
+    t.bigint "question_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["question_id"], name: "index_answers_on_question_id"
@@ -23,14 +26,14 @@ ActiveRecord::Schema.define(version: 2022_04_15_221306) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
-    t.integer "course_id", null: false
+    t.bigint "course_id", null: false
     t.index ["course_id"], name: "index_categories_on_course_id"
   end
 
   create_table "clusters", force: :cascade do |t|
     t.text "name"
     t.string "notation"
-    t.integer "domain_id", null: false
+    t.bigint "domain_id", null: false
     t.index ["domain_id"], name: "index_clusters_on_domain_id"
   end
 
@@ -40,7 +43,7 @@ ActiveRecord::Schema.define(version: 2022_04_15_221306) do
 
   create_table "domains", force: :cascade do |t|
     t.text "name"
-    t.integer "category_id", null: false
+    t.bigint "category_id", null: false
     t.index ["category_id"], name: "index_domains_on_category_id"
   end
 
@@ -48,8 +51,8 @@ ActiveRecord::Schema.define(version: 2022_04_15_221306) do
     t.string "content"
     t.string "difficulty"
     t.boolean "isMultipleChoice"
-    t.integer "section_id", null: false
-    t.integer "standard_id", null: false
+    t.bigint "section_id", null: false
+    t.bigint "standard_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["section_id"], name: "index_questions_on_section_id"
@@ -58,7 +61,7 @@ ActiveRecord::Schema.define(version: 2022_04_15_221306) do
 
   create_table "sections", force: :cascade do |t|
     t.text "instructions"
-    t.integer "test_id", null: false
+    t.bigint "test_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["test_id"], name: "index_sections_on_test_id"
@@ -67,22 +70,22 @@ ActiveRecord::Schema.define(version: 2022_04_15_221306) do
   create_table "standards", force: :cascade do |t|
     t.text "description"
     t.string "notation"
-    t.integer "cluster_id", null: false
+    t.bigint "cluster_id", null: false
     t.index ["cluster_id"], name: "index_standards_on_cluster_id"
   end
 
   create_table "tests", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_tests_on_user_id"
   end
 
   create_table "user_courses", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "course_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["course_id"], name: "index_user_courses_on_course_id"
