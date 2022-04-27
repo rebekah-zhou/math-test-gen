@@ -81,9 +81,6 @@ function Login({ onLogin }) {
   const [errorMsgs, setErrorMsgs] = useState([])
   const [selectedState, setSelectedState] = useState(null);
   const [selectedCourses, setSelectedCourses] = useState(null);
-  
-  console.log(selectedCourses)
-
 
   function openModal(loginOrSignup) {
     setShowLogin(loginOrSignup)
@@ -98,7 +95,7 @@ function Login({ onLogin }) {
   }
 
   function submitFetch(userObj, routeString) { 
-    fetch(routeString, {
+    fetch(`https://math-test-gen.herokuapp.com${routeString}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

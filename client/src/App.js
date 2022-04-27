@@ -15,7 +15,7 @@ function App() {
   const state = useLocation()
 
   useEffect(() => {
-      fetch('/me').then(r => {
+      fetch('https://math-test-gen.herokuapp.com/me').then(r => {
         if (r.ok) {
           r.json()
           .then(user => setUser(() => user))
@@ -34,7 +34,6 @@ function App() {
     }
   }, [user])
   
-  console.log(user)
   function handleLogin(user, selectedCourses) {
     if (selectedCourses) {
       const userCourses = []
@@ -53,7 +52,7 @@ function App() {
 
       const userCourseObj = {"userCourses": userCourses}
 
-      fetch('/user_courses', {
+      fetch('https://math-test-gen.herokuapp.com/user_courses', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -67,7 +66,7 @@ function App() {
     const path = state?.pathname 
 
     if (path === '/') {
-      navigate('/test')
+      navigate('/math-test-gen/test')
     } 
   }
   
@@ -85,13 +84,13 @@ function App() {
       <NavBar onLogout={handleLogout} />
       {user ?
         <Routes>
-          <Route path='/test/:id' element={<EditTest />} />
-          <Route path='/test' element={<TestList />}/>
-          <Route path='/' element={<Home onLogin={handleLogin}/>} />
+          <Route path='/math-test-gen/test/:id' element={<EditTest />} />
+          <Route path='/math-test-gen/test' element={<TestList />}/>
+          <Route path='/math-test-gen/' element={<Home onLogin={handleLogin}/>} />
         </Routes>
         :
         <Routes>
-          <Route path='/' element={<Home onLogin={handleLogin}/>} />
+          <Route path='/math-test-gen/' element={<Home onLogin={handleLogin}/>} />
           <Route path='*' element={<Home onLogin={handleLogin} />}/>
         </Routes>
       } 

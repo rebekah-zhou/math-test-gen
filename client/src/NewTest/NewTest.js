@@ -82,11 +82,10 @@ function NewTest() {
   const [showStandardsDropdown, setShowStandardsDropdown] = useState(false)
   const user = useContext(UserContext)
   const navigate = useNavigate()
-  console.log(standards)
-  console.log(selectedCourse)
+
   useEffect(() => {
     if (selectedCourse) {
-      fetch(`/courses/${selectedCourse.id}`)
+      fetch(`https://math-test-gen.herokuapp.com/courses/${selectedCourse.id}`)
       .then(r => r.json())
       .then(courses => setStandards(courses.standards))
     }
@@ -127,7 +126,7 @@ function NewTest() {
     setShowStandardsDropdown(true)
     e.preventDefault();
 
-    fetch(`/tests`, {
+    fetch(`https://math-test-gen.herokuapp.com/tests`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -152,7 +151,6 @@ function NewTest() {
 
     selectedStandards.forEach(standard => {
       const std = standards.find(s => s.id === standard.value)
-      console.log(std)
       sections.push({
         instructions: `${std?.notation}: ${std?.description}`,
         test_id: test.id
@@ -160,7 +158,7 @@ function NewTest() {
     })
     const sectionObj = {"sections": sections}
 
-    fetch(`/sections`, {
+    fetch(`https://math-test-gen.herokuapp.com/sections`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -54,7 +54,7 @@ function TestList() {
 
  useEffect(() => {
   if (user) {
-    fetch(`/users/${user.id}/tests`)
+    fetch(`https://math-test-gen.herokuapp.com/users/${user.id}/tests`)
     .then(r => r.json())
     .then(testdata => setTests(testdata))
   }
