@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'https://rebekah-zhou.github.io/math-test-gen'
+    origins "https://rebekah-zhou.github.io", "http://localhost:4000"
 
     resource '*',
       headers: :any,
