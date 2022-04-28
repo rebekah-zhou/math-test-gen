@@ -10,6 +10,7 @@ const SplitDiv = styled.div`
   display: flex;
   justify-content: space-evenly;
   background-color: ${props => props.theme.colors.cream};
+  height: 100%;
 `
 function Test() {
   const [test, setTest] = useState([])
@@ -22,6 +23,8 @@ function Test() {
     .then(r => r.json())
     .then(test => setTest(test))
   }, [id, questions])
+
+  console.log(test)
   
   function handleQuestionFetch(questionFormData, questionCount) {
     const questions = []

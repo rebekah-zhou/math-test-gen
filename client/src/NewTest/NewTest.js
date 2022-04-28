@@ -145,8 +145,6 @@ function NewTest() {
   function handleCreateSectionsClick(e) {
     e.preventDefault();
 
-    closeModal();
-
     const sections = []
 
     selectedStandards.forEach(standard => {
@@ -166,7 +164,10 @@ function NewTest() {
       body: JSON.stringify(sectionObj)
     })
     .then(r => r.json())
-    .then(navigate(`/test/${test.id}`))
+    .then(() => {
+      closeModal()
+      navigate(`/math-test-gen/test/${test.id}`)
+    })
 
   }
 
