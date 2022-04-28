@@ -1,24 +1,32 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Welcome to Math-Test-Gen! 
 
-Things you may want to cover:
+![front page of math-test-gen](public/FrontPageOfMathTestGen.PNG "Math Test Gen")
 
-* Ruby version
+This project is a state standards based math assessment generator.
 
-* System dependencies
+## Try out the site ~> [Math Test Gen](https://rebekah-zhou.github.io/math-test-gen)
 
-* Configuration
 
-* Database creation
 
-* Database initialization
+### Development
 
-* How to run the test suite
+### Run the following terminal commands to get the backend started...
 
-* Services (job queues, cache servers, search engines, etc.)
+First, we install all ruby gems via `bundle install`.
 
-* Deployment instructions
+Next, create the databases using `rails db:create`,
 
-* ...
+followed by migrating our tables, `rails db:migrate`,
+
+and then seeding our data, `rails db:seed`. 
+
+Run `rails s` to start the server. 
+
+
+### Run the following terminal commands to get the frontend started...
+
+Cd into the client folder and install the packages via `npm install`.
+
+Finally, run `npm start` to get it up and going!
