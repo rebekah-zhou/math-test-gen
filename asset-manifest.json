@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/math-test-gen/static/css/main.a3cd3d24.css",
-    "main.js": "/math-test-gen/static/js/main.aec005f9.js",
+    "main.js": "/math-test-gen/static/js/main.ebfbf2c7.js",
     "static/js/787.c4e7f8f9.chunk.js": "/math-test-gen/static/js/787.c4e7f8f9.chunk.js",
     "static/media/LandingPhoto.png": "/math-test-gen/static/media/LandingPhoto.c5595a29cb267734e846.png",
     "static/media/Lobster-Regular.ttf": "/math-test-gen/static/media/Lobster-Regular.03c38496322925fec242.ttf",
     "index.html": "/math-test-gen/index.html",
     "main.a3cd3d24.css.map": "/math-test-gen/static/css/main.a3cd3d24.css.map",
-    "main.aec005f9.js.map": "/math-test-gen/static/js/main.aec005f9.js.map",
+    "main.ebfbf2c7.js.map": "/math-test-gen/static/js/main.ebfbf2c7.js.map",
     "787.c4e7f8f9.chunk.js.map": "/math-test-gen/static/js/787.c4e7f8f9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a3cd3d24.css",
-    "static/js/main.aec005f9.js"
+    "static/js/main.ebfbf2c7.js"
   ]
 }
