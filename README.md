@@ -11,6 +11,7 @@ This project features a react frontend styled with styled-components and a ruby 
 Future goals: downloadable PDF test, add more question types for standards, re-design system for larger scope. 
 
 ## Try out the site ~> [Math Test Gen](https://rebekah-zhou.github.io/math-test-gen)
+(It takes a few seconds to load on Heroku's free hosting tier.)
 
 ## Watch a demo ~> [Math Test Gen](https://www.loom.com/share/2bba5de81478407f9440503bffd8545a)
 
