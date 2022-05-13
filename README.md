@@ -4,7 +4,7 @@
 
 ![front page of math-test-gen](public/FrontPageOfMathTestGen.PNG "Math Test Gen")
 
-When I was a math educator in Tennessee, I spent a lot of my time with test creation. Creating retakes for students was time-consuming, but I believed that every student learns on their own timeline. I used several apps, but I knew there was a way to automate the question generation. Inspired by my own frustrations with time management as a math educator, I created Math Test Gen, a state standards based assessment generator. The app creates tests with procedurally generated questions and "smart" answers based on a user selected state standard. Users can also shuffle questions and answers to give different versions of the same test for different periods. 
+When I was a math educator in Tennessee, I spent a lot of my time with test creation. Creating retakes for students was time-consuming, but I believe that every student learns on their own timeline. I used several apps, but I knew there was a way to automate the question generation process. Inspired by my own frustrations with time management as a math educator, I created Math Test Gen, a state standards based assessment generator. The app creates tests with procedurally generated questions and "smart" answers based on a user selected state standard. Users can also shuffle questions and answers to give different versions of the same test for different classes. 
 
 This project features a react frontend styled with styled-components and a ruby on rails backend. 
 
