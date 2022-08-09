@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import TestForm from './TestForm'
 import TestView from './TestView'
 import styled from 'styled-components'
+import { config } from '../Common/Constants'
 
 export const ShuffledQuestionsContext = createContext()
 
@@ -16,12 +17,13 @@ function Test() {
   const [questions, setQuestions] = useState([])
   const [shuffledQuestions, setShuffledQuestions] = useState(null)
   const { id } = useParams()
+  const url = config.url.API_URL
 
   useEffect(() => {
-    fetch(`https://math-test-gen.herokuapp.com/tests/${id}`)
+    fetch(`${url}/tests/${id}`)
     .then(r => r.json())
     .then(test => setTest(test))
-  }, [id, questions])
+  }, [id, questions, url])
   
   function handleQuestionFetch(questionFormData, questionCount) {
     const questions = []
@@ -31,7 +33,7 @@ function Test() {
     }
     const questionObj = {"questions": questions}
 
-    fetch('https://math-test-gen.herokuapp.com/questions', {
+    fetch(`${url}/questions`, {
       method: "POST",
       headers: {
       "Content-Type": "application/json",
@@ -49,13 +51,13 @@ function Test() {
   }
   
   function handleShuffle(section, whatToShuffle) {
-    fetch(`https://math-test-gen.herokuapp.com/sections/${section.id}/shufflequestions`)
+    fetch(`${url}/sections/${section.id}/shufflequestions`)
       .then(r => r.json())
       .then(data => setShuffledQuestions(data))
   }
 
   function handleTitlePatch(title) {
-    fetch(`https://math-test-gen.herokuapp.com/tests/${id}`, {
+    fetch(`${url}/tests/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

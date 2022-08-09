@@ -55,6 +55,11 @@ class TestsController < ApplicationController
       end
     end
 
+    def download_pdf
+      kit = PDFKit.new('http://google.com')
+      file = kit.to_file('./public/test.pdf')
+    end
+
     private
     def test_params
       params.permit(:title, :description, :user_id)

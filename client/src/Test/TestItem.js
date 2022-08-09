@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import deleteIcon from './Icons/deleteIcon.png'
 import downloadIcon from './Icons/downloadIcon.png'
 import copyIcon from './Icons/copyIcon.png'
+import { config } from '../Common/Constants'
 
 const RowDiv = styled.div`
   display: flex;
@@ -37,9 +38,10 @@ const DateSpan = styled.span`
 
 function TestItem({ test, onDelete }) {
   const [isTestSelected, setIsTestSelected] = useState(false)
+  const url = config.url.API_URL
 
   function handleDelete() {
-	fetch(`https://math-test-gen.herokuapp.com/tests/${test.id}`, {
+	fetch(`${url}/tests/${test.id}`, {
 		method: 'DELETE'
 	})
 	.then(r => {
@@ -62,7 +64,7 @@ function TestItem({ test, onDelete }) {
 					value={isTestSelected}
 					onChange={() => setIsTestSelected(!isTestSelected)}
 				/>
-				<a href={`/test/${test.id}`}>{test.title}</a>
+				<a href={`test/${test.id}`}>{test.title}</a>
 			</TitleDiv>
 			<ColumnHeaderDiv>
 				<OwnerSpan>You</OwnerSpan>
