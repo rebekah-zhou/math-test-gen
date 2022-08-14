@@ -4,6 +4,7 @@ import deleteIcon from './Icons/deleteIcon.png'
 import downloadIcon from './Icons/downloadIcon.png'
 import copyIcon from './Icons/copyIcon.png'
 import { useNavigate } from 'react-router-dom'
+import { config } from '../Common/Constants'
 
 const RowDiv = styled.div`
   display: flex;
@@ -50,9 +51,10 @@ const Button = styled.button`
 function TestItem({ test, onDelete }) {
   const [isTestSelected, setIsTestSelected] = useState(false)
   const navigate = useNavigate()
+  const url = config.url.API_URL
 
   function handleDelete() {
-	fetch(`https://math-test-gen.herokuapp.com/tests/${test.id}`, {
+	fetch(`${url}/tests/${test.id}`, {
 		method: 'DELETE'
 	})
 	.then(r => {

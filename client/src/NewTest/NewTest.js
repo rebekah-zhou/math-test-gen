@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import Select from 'react-select'
 import { UserContext } from '../App';
+import { config } from '../Common/Constants'
 
 const Horizontal = styled.div`
   display: flex;
@@ -82,10 +83,11 @@ function NewTest() {
   const [showStandardsDropdown, setShowStandardsDropdown] = useState(false)
   const user = useContext(UserContext)
   const navigate = useNavigate()
+  const url = config.url.API_URL
 
   useEffect(() => {
     if (selectedCourse) {
-      fetch(`https://math-test-gen.herokuapp.com/courses/${selectedCourse.id}`)
+      fetch(`/courses/${selectedCourse.id}`)
       .then(r => r.json())
       .then(courses => setStandards(courses.standards))
     }
@@ -126,7 +128,7 @@ function NewTest() {
     setShowStandardsDropdown(true)
     e.preventDefault();
 
-    fetch(`https://math-test-gen.herokuapp.com/tests`, {
+    fetch(`${url}/tests`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -156,7 +158,7 @@ function NewTest() {
     })
     const sectionObj = {"sections": sections}
 
-    fetch(`https://math-test-gen.herokuapp.com/sections`, {
+    fetch(`${url}/sections`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

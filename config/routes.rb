@@ -17,5 +17,7 @@ Rails.application.routes.draw do
   post "/signup", to: 'users#create'
   get "/me", to: "users#show_me"
   delete "/logout", to: "sessions#destroy"
+
+  get '/pdf', to: 'tests#download_pdf'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

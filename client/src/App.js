@@ -5,6 +5,7 @@ import TestList from './Test/TestList'
 import EditTest from './Test/EditTest';
 import React, { useEffect, useState, createContext } from "react"
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import { config } from './Common/Constants'
 
 export const UserContext = createContext()
 
@@ -13,9 +14,10 @@ function App() {
   const [pageLoaded, setPageLoaded] = useState(false)
   const navigate = useNavigate()
   const state = useLocation()
+  const url = config.url.API_URL
 
   useEffect(() => {
-      fetch('https://math-test-gen.herokuapp.com/me').then(r => {
+      fetch(`${url}/me`).then(r => {
         if (r.ok) {
           r.json()
           .then(user => setUser(() => user))
@@ -25,7 +27,7 @@ function App() {
           .then(setPageLoaded(true))
         }
       }) 
-    }, [])
+    }, [url])
 
     
   useEffect(() => {
@@ -52,7 +54,7 @@ function App() {
 
       const userCourseObj = {"userCourses": userCourses}
 
-      fetch('https://math-test-gen.herokuapp.com/user_courses', {
+      fetch(`${url}/user_courses`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

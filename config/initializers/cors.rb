@@ -5,6 +5,8 @@
 
 # Read more: https://github.com/cyu/rack-cors
 
+# git Rails.application.config.hosts << "https://rebekah-zhou.github.io"
+
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins "https://rebekah-zhou.github.io", "http://localhost:4000"

@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import styled from 'styled-components'
 import Select from 'react-select'
 import states from './states.json'
+import { config } from '../Common/Constants'
 
 const Horizontal = styled.div`
   display: flex;
@@ -81,6 +82,7 @@ function Login({ onLogin }) {
   const [errorMsgs, setErrorMsgs] = useState([])
   const [selectedState, setSelectedState] = useState(null);
   const [selectedCourses, setSelectedCourses] = useState(null);
+  const url = config.url.API_URL
 
   function openModal(loginOrSignup) {
     setShowLogin(loginOrSignup)
@@ -95,7 +97,7 @@ function Login({ onLogin }) {
   }
 
   function submitFetch(userObj, routeString) { 
-    fetch(`https://math-test-gen.herokuapp.com${routeString}`, {
+    fetch(`${url}/${routeString}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
