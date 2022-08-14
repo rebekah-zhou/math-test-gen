@@ -14,12 +14,24 @@ const LetterDiv = styled.div`
   box-shadow: 10px 5px 20px grey;
 `
 const SectionTitle = styled.span`
-  font-size: large;
+  font-size: calc(11px + 0.3vw);
   font-weight: bold;
 `
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
+`
+const StyledP = styled.p`
+  font-size: calc(10px + 0.3vw);
+  padding: 5px;
+  margin: 5px 0 0 0;
+`
+const StyledHr = styled.hr`
+  border: none;
+  border-bottom: 0.2px solid black;
+  margin: 0;
+  margin-bottom: 5px;
+  width: 100%;
 `
 function TestView({ test }) {
 
@@ -42,8 +54,15 @@ function TestView({ test }) {
       <Header>
         <h1>{`${test.title}`}</h1>
         <div style={{'width':'35%'}}>
-          <p>Name: ____________________________</p>
-          <p>Period: _____ Date: ________________</p>
+          <div className='horizontal' style={{'width':'100%'}}>
+            <StyledP>Name:</StyledP><StyledHr/>
+          </div>
+          <div className='horizontal' style={{'width':'100%'}}>
+            <div className='horizontal' style={{'width':'100%'}}>
+              <StyledP>Period:</StyledP><StyledHr/>
+            </div>
+            <StyledP>Date:</StyledP><StyledHr/>
+          </div>
         </div>
       </Header>
       {sections}

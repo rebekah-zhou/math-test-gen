@@ -11,6 +11,9 @@ const FlexGrid = styled.div`
 const Ol = styled.ol`
   padding: 0;
 `
+const StyledP = styled.p`
+  margin-top: 0px;
+`
 
 function TestSection({ section }) {
   const shuffledQs = useContext(ShuffledQuestionsContext)
@@ -35,7 +38,7 @@ function TestSection({ section }) {
 
   return (
     <div className='vertical'>
-      <p>{`${section.instructions}`}</p>
+      <StyledP>{`${section.instructions}`}</StyledP>
         <Ol>
           <FlexGrid>
             {questionsToShow}

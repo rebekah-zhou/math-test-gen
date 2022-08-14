@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import NewTest from '../NewTest/NewTest'
 import styled from "styled-components";
 import { UserContext } from '../App';
+import { config } from '../Common/Constants'
 
 const StyledTitle = styled.span`
   font-family: 'Lobster';
@@ -63,11 +64,11 @@ const NavUnlisted = styled.ul`
 `
 
 function NavBar({ onLogout }) {
-
+  const url = config.url.API_URL
   const user = useContext(UserContext)
 
   function handleLogout() {
-    fetch('/https://math-test-gen.herokuapp.com/logout', {
+    fetch(`${url}/logout`, {
       method: 'DELETE',
     }).then(() => onLogout())
   }

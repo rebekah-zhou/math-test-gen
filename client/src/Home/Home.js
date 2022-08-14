@@ -31,7 +31,7 @@ const Box = styled.div`
   justify-content: center;
   padding: 20px;
   /* background: rgba(255, 255, 255, 0.5); */
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(81, 81, 93, 0.75);
 `
 const StyledP = styled.p` 
   width: 100%;

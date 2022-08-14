@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import deleteIcon from './Icons/deleteIcon.png'
 import downloadIcon from './Icons/downloadIcon.png'
 import copyIcon from './Icons/copyIcon.png'
+import { useNavigate } from 'react-router-dom'
+import { config } from '../Common/Constants'
 
 const RowDiv = styled.div`
   display: flex;
@@ -34,12 +36,25 @@ const OwnerSpan = styled.span`
 const DateSpan = styled.span`
 	width: 125px;
 `
+const Button = styled.button`
+	background: none;
+	color: black;
+	border: none;
+	padding: 0 0 23px 10px;
+	margin: 0;
+
+&:hover {
+	text-decoration: underline;
+}
+`
 
 function TestItem({ test, onDelete }) {
   const [isTestSelected, setIsTestSelected] = useState(false)
+  const navigate = useNavigate()
+  const url = config.url.API_URL
 
   function handleDelete() {
-	fetch(`https://math-test-gen.herokuapp.com/tests/${test.id}`, {
+	fetch(`${url}/tests/${test.id}`, {
 		method: 'DELETE'
 	})
 	.then(r => {
@@ -52,6 +67,10 @@ function TestItem({ test, onDelete }) {
 	})
   }
 
+  function handleTestClick() {
+	navigate(`/math-test-gen/test/${test.id}`)
+  }
+
   return (
     <ColumnDiv>
 		<RowDiv>
@@ -62,7 +81,7 @@ function TestItem({ test, onDelete }) {
 					value={isTestSelected}
 					onChange={() => setIsTestSelected(!isTestSelected)}
 				/>
-				<a href={`/test/${test.id}`}>{test.title}</a>
+				<Button onClick={handleTestClick}>{test.title}</Button>
 			</TitleDiv>
 			<ColumnHeaderDiv>
 				<OwnerSpan>You</OwnerSpan>

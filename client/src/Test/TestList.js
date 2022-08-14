@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { UserContext } from '../App'
 import TestItem from './TestItem'
 import SearchBar from './SearchBar'
+import { config } from '../Common/Constants'
 
 const FlexGridDiv = styled.div`
   display: flex;
@@ -50,15 +51,15 @@ function TestList() {
   const [tests, setTests] = useState([])
   const user = useContext(UserContext)
   const [searchBarValue, setSearchBarValue] = useState("")
-
+  const url = config.url.API_URL
 
  useEffect(() => {
   if (user) {
-    fetch(`https://math-test-gen.herokuapp.com/users/${user.id}/tests`)
+    fetch(`${url}/users/${user.id}/tests`)
     .then(r => r.json())
     .then(testdata => setTests(testdata))
   }
-}, [user])
+}, [user, url])
 
   function onDelete(deletedTest) {
     const updatedTests = tests.filter(test => test.id !== deletedTest.id)

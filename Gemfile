@@ -19,8 +19,10 @@ gem 'active_model_serializers'
 # PDF generation
 # gem 'wicked_pdf'
 # # wicked_pdf is a wrapper for the following
-# gem 'wkhtmltopdf-binary', group: :development
-# gem "wkhtmltopdf-heroku", group: :production
+gem 'wkhtmltopdf-binary', group: :development
+gem "wkhtmltopdf-heroku", group: :production
+
+gem 'pdfkit'
 
 # gem allowing nullify then purge 
 # gem 'miss_hannigan'
