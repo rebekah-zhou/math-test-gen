@@ -64,17 +64,14 @@ function App() {
     } else {
       setUser(() => user)
     }
-    
-    const path = state?.pathname 
 
-    if (path === '/') {
-      navigate('/math-test-gen/test')
-    } 
+    navigate('/math-test-gen/test')
+
   }
   
   function handleLogout() {
     setUser(null)
-    navigate('/')
+    navigate('/math-test-gen')
   }
   
   if (!pageLoaded) {
