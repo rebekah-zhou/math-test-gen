@@ -16,7 +16,7 @@ class QuestionsController < ApplicationController
                     equation_data = question.create_onestep_equation
                     question.update(content: equation_data[:equation])
                     onestep_answer_choice_logic(equation_data, question)
-                end
+                end 
             end
         rescue ActiveRecord::RecordInvalid => exception
             @questions = { error: { status: 422, message: exception} }
@@ -86,28 +86,3 @@ class QuestionsController < ApplicationController
         create_answers(ans1, ans2, ans3, ans4, question.id)
     end
 end
-
-
-# Post /questions
-# {
-#     "questions": [
-#         {
-#             "isMultipleChoice": true,
-#             "difficulty": "easy",
-#             "section_id": 1,
-#             "standard_id": 129
-#         },
-#         {
-#             "isMultipleChoice": true,
-#             "difficulty": "easy",
-#             "section_id": 1,
-#             "standard_id": 129
-#         },
-#         {
-#             "isMultipleChoice": true,
-#             "difficulty": "easy",
-#             "section_id": 1,
-#             "standard_id": 129
-#         }
-#     ]
-# }
